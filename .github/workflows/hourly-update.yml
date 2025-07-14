@@ -22,7 +22,7 @@ jobs:
         with: { python-version: '3.11' }
 
       - name: Install deps from main/requirements.txt
-        run: pip install -r main/requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Run hourly_update.py
         env:
