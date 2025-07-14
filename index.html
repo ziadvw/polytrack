@@ -68,6 +68,49 @@
             background: rgba(255, 255, 255, 0.1);
             color: #00E5FF;
         }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .chart-wrapper {
+                padding: 16px;
+                border-radius: 16px;
+            }
+            .title {
+                font-size: 32px;
+                letter-spacing: -0.3px;
+            }
+            #chart-container {
+                height: 400px;
+            }
+            .time-controls button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+            .chart-wrapper {
+                padding: 12px;
+                border-radius: 12px;
+            }
+            .title {
+                font-size: 28px;
+                letter-spacing: -0.2px;
+            }
+            #chart-container {
+                height: 300px;
+            }
+            .time-controls button {
+                padding: 4px 8px;
+                font-size: 11px;
+            }
+        }
     </style>
 </head>
 <body>
