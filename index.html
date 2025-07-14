@@ -158,15 +158,7 @@
                 setupTimeControls();
                 updateTimeRange('3M');
 
-                // Add the image watermark (bottom left)
-                createImageWatermark(chart.panes()[0], 'polymarket-logo.png', {
-                    alpha: 0.5, // semi-transparent
-                    padding: 24,
-                    horzAlign: 'left',
-                    vertAlign: 'bottom',
-                    width: 80, // adjust as needed
-                    height: 32, // adjust as needed
-                });
+                // Removed watermark code
 
                 window.addEventListener('resize', () => {
                     const container = document.getElementById('chart-container');
