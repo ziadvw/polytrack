@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PolyVol Chart</title>
+    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
     <style>
         body {
             margin: 0;
@@ -85,16 +86,15 @@
         </div>
     </div>
 
-    <script type="module">
-        import { createChart } from 'https://cdn.skypack.dev/lightweight-charts';
-
+    <script>
         let chart;
         let lineSeries;
         let chartData = [];
 
         async function initChart() {
             try {
-                chart = createChart(document.getElementById('chart-container'), {
+                // Create the chart
+                chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
                     layout: {
                         background: { color: '#0A0A0A' },
                         textColor: '#ffffff',
@@ -113,7 +113,7 @@
                         textColor: '#666666',
                     },
                     crosshair: {
-                        mode: 0, // LightweightCharts.CrosshairMode.Normal
+                        mode: LightweightCharts.CrosshairMode.Normal,
                         vertLine: {
                             color: '#00E5FF',
                             width: 1,
@@ -127,6 +127,7 @@
                     },
                 });
 
+                // Create the line series
                 lineSeries = chart.addAreaSeries({
                     lineColor: '#00E5FF',
                     topColor: 'rgba(0, 229, 255, 0.4)',
@@ -134,6 +135,7 @@
                     lineWidth: 2,
                     crosshairMarkerVisible: true,
                     crosshairMarkerRadius: 4,
+                    title: '',
                     priceFormat: {
                         type: 'price',
                         precision: 2,
@@ -141,32 +143,34 @@
                     },
                 });
 
-                const response = await fetch('data/daily_scores.json');
+                // Fetch and load the data
+                const response = await fetch('data/chart.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                const rawData = await response.json();
-
-                chartData = rawData.map(item => ({
-                    time: item.time,
-                    value: Number(item.value),
-                }));
-
+                chartData = await response.json();
+                
+                // Set initial data and view
                 lineSeries.setData(chartData);
                 chart.timeScale().fitContent();
 
+                // Setup time range buttons
                 setupTimeControls();
+
+                // Set default range
                 updateTimeRange('3M');
 
-                // Removed watermark code
-
-                window.addEventListener('resize', () => {
+                // Handle window resizing
+                function handleResize() {
                     const container = document.getElementById('chart-container');
                     chart.applyOptions({
                         width: container.clientWidth,
                         height: container.clientHeight,
                     });
-                });
+                }
+
+                window.addEventListener('resize', handleResize);
+                handleResize(); // Initial resize
             } catch (error) {
                 console.error('Error setting up chart:', error);
             }
@@ -178,15 +182,19 @@
                 button.addEventListener('click', () => {
                     buttons.forEach(b => b.classList.remove('active'));
                     button.classList.add('active');
-                    updateTimeRange(button.dataset.range);
+                    const range = button.dataset.range;
+                    updateTimeRange(range);
                 });
             });
+
+            // Set 3M as default active
             document.querySelector('button[data-range="3M"]').classList.add('active');
         }
 
         function updateTimeRange(range) {
             if (!chartData.length) return;
 
+            const now = new Date();
             const lastDataPoint = new Date(chartData[chartData.length - 1].time);
             let startDate = new Date(lastDataPoint);
 
@@ -205,12 +213,16 @@
                     return;
             }
 
+            const startTime = startDate.getTime() / 1000;
+            const endTime = lastDataPoint.getTime() / 1000;
+            
             chart.timeScale().setVisibleRange({
-                from: Math.floor(startDate.getTime() / 1000),
-                to: Math.floor(lastDataPoint.getTime() / 1000),
+                from: startTime,
+                to: endTime,
             });
         }
 
+        // Initialize the chart when the page loads
         document.addEventListener('DOMContentLoaded', initChart);
     </script>
 </body>
