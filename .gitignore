@@ -18,3 +18,6 @@ __pycache__/
 # IDE settings (optional)
 .vscode/
 .idea/
+
+# Generated data files (updated by workflow)
+data/daily_scores.json
