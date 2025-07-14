@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PolyVol Chart</title>
-    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
     <style>
         body {
             margin: 0;
@@ -86,14 +85,16 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        import { createChart, createImageWatermark } from 'https://cdn.skypack.dev/lightweight-charts';
+
         let chart;
         let lineSeries;
         let chartData = [];
 
         async function initChart() {
             try {
-                chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
+                chart = createChart(document.getElementById('chart-container'), {
                     layout: {
                         background: { color: '#0A0A0A' },
                         textColor: '#ffffff',
@@ -112,7 +113,7 @@
                         textColor: '#666666',
                     },
                     crosshair: {
-                        mode: LightweightCharts.CrosshairMode.Normal,
+                        mode: 0, // LightweightCharts.CrosshairMode.Normal
                         vertLine: {
                             color: '#00E5FF',
                             width: 1,
@@ -140,13 +141,12 @@
                     },
                 });
 
-                const response = await fetch('data/daily_scores.json');  // ✅ updated here
+                const response = await fetch('data/daily_scores.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const rawData = await response.json();
 
-                // Transform to { time, value } array with numeric value
                 chartData = rawData.map(item => ({
                     time: item.time,
                     value: Number(item.value),
@@ -157,6 +157,16 @@
 
                 setupTimeControls();
                 updateTimeRange('3M');
+
+                // Add the image watermark (bottom left)
+                createImageWatermark(chart.panes()[0], 'polymarket-logo.png', {
+                    alpha: 0.5, // semi-transparent
+                    padding: 24,
+                    horzAlign: 'left',
+                    vertAlign: 'bottom',
+                    width: 80, // adjust as needed
+                    height: 32, // adjust as needed
+                });
 
                 window.addEventListener('resize', () => {
                     const container = document.getElementById('chart-container');

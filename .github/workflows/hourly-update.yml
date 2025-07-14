@@ -24,11 +24,11 @@ jobs:
       - name: Install deps from main/requirements.txt
         run: pip install -r requirements.txt
 
-      - name: Run hourly_update.py
+      - name: Run hourly-update.py
         env:
           PYTHONPATH: main                    # so `import scraper` works
           ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
-        run: python main/scripts/hourly_update.py
+        run: python main/scripts/hourly-update.py
 
       - name: Commit updated data
         run: |
