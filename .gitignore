@@ -1,0 +1,20 @@
+# Byte-compiled / optimized / build files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+.env.*.local
+
+# Editor backup files
+*.swp
+*.~ 
+*.tmp
+
+# macOS finder files
+.DS_Store
+
+# IDE settings (optional)
+.vscode/
+.idea/

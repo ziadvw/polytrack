@@ -1,0 +1,39 @@
+name: Hourly – update score & snapshot
+
+on:
+  schedule:
+    - cron: '00 * * * *'          # every hour at :30 UTC  (≈ :30 ET)
+  workflow_dispatch:
+
+permissions: { contents: write }
+
+jobs:
+  hourly:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+
+      - name: Install deps from main/requirements.txt
+        run: pip install -r main/requirements.txt
+
+      - name: Run hourly_update.py
+        env:
+          PYTHONPATH: main                    # so `import scraper` works
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+        run: python main/scripts/hourly_update.py
+
+      - name: Commit updated data
+        run: |
+          git config --global user.name  "ci-bot"
+          git config --global user.email "bot@users.noreply.github.com"
+          git add data/top10 data/daily_scores.json
+          git commit -m "Hourly score $(date -u +'%Y-%m-%d %H:%M') [skip ci]" || echo "nothing to commit"
+          git push

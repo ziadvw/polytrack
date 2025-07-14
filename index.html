@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyVol Chart</title>
+    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .chart-wrapper {
+            background-color: #0A0A0A;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            padding: 24px;
+            border: 1px solid #1a1a1a;
+        }
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 0 10px;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 800;
+            font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+        .chart-container-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        #chart-container {
+            height: 600px;
+        }
+        .time-controls {
+            display: flex;
+            gap: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px;
+            border-radius: 12px;
+            width: fit-content;
+        }
+        .time-controls button {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: #666666;
+            transition: all 0.2s ease;
+        }
+        .time-controls button:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .time-controls button.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #00E5FF;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-wrapper">
+        <div class="header">
+            <div class="title">How Crazy is the World Today?</div>
+        </div>
+        <div class="chart-container-wrapper">
+            <div id="chart-container"></div>
+        </div>
+        <div class="time-controls">
+            <button data-range="1M">1M</button>
+            <button data-range="3M">3M</button>
+            <button data-range="1Y">1Y</button>
+            <button data-range="ALL">ALL</button>
+        </div>
+    </div>
+
+    <script>
+        let chart;
+        let lineSeries;
+        let chartData = [];
+
+        async function initChart() {
+            try {
+                // Create the chart
+                chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
+                    layout: {
+                        background: { color: '#0A0A0A' },
+                        textColor: '#ffffff',
+                    },
+                    grid: {
+                        vertLines: { color: 'rgba(255, 255, 255, 0.03)' },
+                        horzLines: { color: 'rgba(255, 255, 255, 0.03)' },
+                    },
+                    timeScale: {
+                        timeVisible: true,
+                        borderColor: '#1a1a1a',
+                        textColor: '#666666',
+                    },
+                    rightPriceScale: {
+                        borderColor: '#1a1a1a',
+                        textColor: '#666666',
+                    },
+                    crosshair: {
+                        mode: LightweightCharts.CrosshairMode.Normal,
+                        vertLine: {
+                            color: '#00E5FF',
+                            width: 1,
+                            style: 3,
+                        },
+                        horzLine: {
+                            color: '#00E5FF',
+                            width: 1,
+                            style: 3,
+                        },
+                    },
+                });
+
+                // Create the line series
+                lineSeries = chart.addAreaSeries({
+                    lineColor: '#00E5FF',
+                    topColor: 'rgba(0, 229, 255, 0.4)',
+                    bottomColor: 'rgba(0, 229, 255, 0.0)',
+                    lineWidth: 2,
+                    crosshairMarkerVisible: true,
+                    crosshairMarkerRadius: 4,
+                    title: '',
+                    priceFormat: {
+                        type: 'price',
+                        precision: 2,
+                        minMove: 0.01,
+                    },
+                });
+
+                // Fetch and load the data
+                const response = await fetch('data/chart.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                chartData = await response.json();
+                
+                // Set initial data and view
+                lineSeries.setData(chartData);
+                chart.timeScale().fitContent();
+
+                // Setup time range buttons
+                setupTimeControls();
+
+                // Set default range
+                updateTimeRange('3M');
+
+                // Handle window resizing
+                function handleResize() {
+                    const container = document.getElementById('chart-container');
+                    chart.applyOptions({
+                        width: container.clientWidth,
+                        height: container.clientHeight,
+                    });
+                }
+
+                window.addEventListener('resize', handleResize);
+                handleResize(); // Initial resize
+            } catch (error) {
+                console.error('Error setting up chart:', error);
+            }
+        }
+
+        function setupTimeControls() {
+            const buttons = document.querySelectorAll('.time-controls button');
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    button.classList.add('active');
+                    const range = button.dataset.range;
+                    updateTimeRange(range);
+                });
+            });
+
+            // Set 3M as default active
+            document.querySelector('button[data-range="3M"]').classList.add('active');
+        }
+
+        function updateTimeRange(range) {
+            if (!chartData.length) return;
+
+            const now = new Date();
+            const lastDataPoint = new Date(chartData[chartData.length - 1].time);
+            let startDate = new Date(lastDataPoint);
+
+            switch (range) {
+                case '1M':
+                    startDate.setMonth(lastDataPoint.getMonth() - 1);
+                    break;
+                case '3M':
+                    startDate.setMonth(lastDataPoint.getMonth() - 3);
+                    break;
+                case '1Y':
+                    startDate.setFullYear(lastDataPoint.getFullYear() - 1);
+                    break;
+                case 'ALL':
+                    chart.timeScale().fitContent();
+                    return;
+            }
+
+            const startTime = startDate.getTime() / 1000;
+            const endTime = lastDataPoint.getTime() / 1000;
+            
+            chart.timeScale().setVisibleRange({
+                from: startTime,
+                to: endTime,
+            });
+        }
+
+        // Initialize the chart when the page loads
+        document.addEventListener('DOMContentLoaded', initChart);
+    </script>
+</body>
+</html>
