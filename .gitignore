@@ -21,3 +21,4 @@ __pycache__/
 
 # Generated data files (updated by workflow)
 data/daily_scores.json
+data/top10/
