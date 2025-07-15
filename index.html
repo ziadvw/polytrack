@@ -1,343 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolyVol Chart</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-        }
-        .chart-wrapper {
-            background-color: #0A0A0A;
-            border-radius: 24px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            padding: 24px;
-            border: 1px solid #1a1a1a;
-        }
-        .header {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin-bottom: 24px;
-            padding: 0 10px;
-        }
-        .title {
-            font-size: 48px;
-            font-weight: 800;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            color: #ffffff;
-            letter-spacing: -0.5px;
-        }
-        .chart-container-wrapper {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        #chart-container {
-            height: 400px;
-        }
-        .time-controls {
-            display: flex;
-            gap: 2px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 4px;
-            border-radius: 12px;
-            width: fit-content;
-        }
-        .time-controls button {
-            padding: 8px 16px;
-            border: none;
-            background: transparent;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            color: #666666;
-            transition: all 0.2s ease;
-        }
-        .time-controls button:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .time-controls button.active {
-            background: rgba(255, 255, 255, 0.1);
-            color: #00E5FF;
-        }
-        
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            body {
-                padding: 12px;
-            }
-            .chart-wrapper {
-                padding: 16px;
-                border-radius: 16px;
-            }
-            .title {
-                font-size: 32px;
-                letter-spacing: -0.3px;
-                word-break: break-word;
-                text-align: center;
-                white-space: normal;
-                margin: 0 auto;
-                max-width: 95vw;
-            }
-            .header {
-                justify-content: center;
-                padding: 0;
-            }
-            #chart-container {
-                height: 250px;
-            }
-            .time-controls button {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-            .chart-legend {
-                font-size: 12px !important;
-                line-height: 15px !important;
-                left: 8px !important;
-                top: 8px !important;
-                padding: 2px 6px !important;
-                border-radius: 6px !important;
-                background: rgba(10,10,10,0.85) !important;
-                max-width: 90vw !important;
-                word-break: break-word;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            body {
-                padding: 8px;
-            }
-            .chart-wrapper {
-                padding: 12px;
-                border-radius: 12px;
-            }
-            .title {
-                font-size: 20px;
-                letter-spacing: -0.1px;
-                word-break: break-word;
-                text-align: left;
-                white-space: normal;
-                margin: 0;
-                max-width: 98vw;
-                flex: 1; /* ✅ added to make it fill header width */
-            }
-            .header {
-                justify-content: flex-start;
-                padding: 0;
-            }
-            #chart-container {
-                height: 210px;
-            }
-            .time-controls button {
-                padding: 4px 8px;
-                font-size: 11px;
-            }
-            .chart-legend {
-                font-size: 10px !important;
-                line-height: 13px !important;
-                left: 4px !important;
-                top: 4px !important;
-                padding: 1px 4px !important;
-                border-radius: 4px !important;
-                background: rgba(10,10,10,0.85) !important;
-                max-width: 98vw !important;
-                word-break: break-word;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PolyVol Chart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+    }
+    .chart-wrapper {
+      background-color: #0A0A0A;
+      border-radius: 24px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      padding: 24px;
+      border: 1px solid #1a1a1a;
+    }
+    .header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 0 10px;
+    }
+    .title {
+      font-size: 48px;
+      font-weight: 800;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+    .chart-container-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    #chart-container {
+      height: 400px;
+    }
+    .time-controls {
+      display: flex;
+      gap: 2px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px;
+      border-radius: 12px;
+      width: fit-content;
+    }
+    .time-controls button {
+      padding: 8px 16px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: #666666;
+      transition: all 0.2s ease;
+    }
+    .time-controls button:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .time-controls button.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #00E5FF;
+    }
+    #event-popup {
+      display: none;
+      position: absolute;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 7px;
+      border-radius: 7px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      max-width: 150px;
+      z-index: 10;
+      font-size: 9.5px;
+      line-height: 1.1;
+      pointer-events: none;
+      border: 1px solid #1a1a1a;
+    }
+    #event-popup .event-card {
+      background: #181c22;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      padding: 6px 7px 4px 7px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    #event-popup .event-title {
+      font-size: 8px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    #event-popup .event-value {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    #event-popup .percent {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #00E5FF;
+      min-width: 24px;
+      text-align: right;
+    }
+    #event-popup .percent-bar-bg {
+      flex: 1;
+      height: 4.5px;
+      background: #222;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    #event-popup .percent-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00E5FF 60%, #00FFA3 100%);
+      border-radius: 2px;
+    }
+  </style>
 </head>
 <body>
-    <div class="chart-wrapper">
-        <div class="header">
-            <div class="title">How Crazy is the World Today?</div>
-        </div>
-        <div class="chart-container-wrapper">
-            <div id="chart-container"></div>
-        </div>
-        <div class="time-controls">
-            <button data-range="1M">1M</button>
-            <button data-range="3M">3M</button>
-            <button data-range="1Y">1Y</button>
-            <button data-range="ALL">ALL</button>
-        </div>
+  <div class="chart-wrapper">
+    <div class="header">
+      <div class="title">How Crazy is the World Today?</div>
     </div>
+    <div class="chart-container-wrapper">
+      <div id="chart-container"></div>
+    </div>
+    <div class="time-controls">
+      <button data-range="1M">1M</button>
+      <button data-range="3M">3M</button>
+      <button data-range="1Y">1Y</button>
+      <button data-range="ALL">ALL</button>
+    </div>
+    <div id="event-popup"></div>
+  </div>
 
-    <script>
-        let chart;
-        let lineSeries;
-        let chartData = [];
-    
-        async function initChart() {
-            try {
-                chart = LightweightCharts.createChart(
-                    document.getElementById('chart-container'),
-                    {
-                        layout: {
-                            background: { color: '#0A0A0A' },
-                            textColor: '#ffffff',
-                        },
-                        grid: {
-                            vertLines: { color: 'rgba(255, 255, 255, 0.03)' },
-                            horzLines: { color: 'rgba(255, 255, 255, 0.03)' },
-                        },
-                        timeScale: {
-                            timeVisible: false,
-                            secondsVisible: false,
-                            borderColor: '#1a1a1a',
-                            textColor: '#666666',
-                            timeFormatter: time => {
-                                const date = new Date(time * 1000);
-                                return date.toLocaleDateString('en-GB', {
-                                    day: '2-digit',
-                                    month: 'short',
-                                    year: '2-digit'
-                                });
-                            },
-                        },
-                        rightPriceScale: {
-                            borderColor: '#1a1a1a',
-                            textColor: '#666666',
-                        },
-                        crosshair: {
-                            mode: LightweightCharts.CrosshairMode.Normal,
-                            vertLine: {
-                                color: '#00E5FF',
-                                width: 1,
-                                style: 3,
-                                labelFormatter: timeValue => {
-                                    let ms;
-                                    if (typeof timeValue === 'object') {
-                                        ms = Date.UTC(timeValue.year, timeValue.month - 1, timeValue.day);
-                                    } else {
-                                        ms = timeValue * 1000;
-                                    }
-                                    return new Date(ms).toLocaleDateString('en-GB', {
-                                        day:   '2-digit',
-                                        month: 'short',
-                                        year:  '2-digit',
-                                    });
-                                },
-                            },
-                            horzLine: {
-                                color: '#00E5FF',
-                                width: 1,
-                                style: 3,
-                            },
-                        },
-                    }
-                );
-    
-                lineSeries = chart.addAreaSeries({
-                    lineColor: '#00E5FF',
-                    topColor: 'rgba(0, 229, 255, 0.4)',
-                    bottomColor: 'rgba(0, 229, 255, 0.0)',
-                    lineWidth: 2,
-                    crosshairMarkerVisible: true,
-                    crosshairMarkerRadius: 4,
-                    priceFormat: {
-                        type: 'price',
-                        precision: 2,
-                        minMove: 0.01,
-                    },
-                });
-    
-                const response = await fetch('data/daily_scores.json');
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                const rawData = await response.json();
-    
-                chartData = rawData.map(item => ({
-                    time: item.time,
-                    value: Number(item.value),
-                }));
-    
-                lineSeries.setData(chartData);
-                chart.timeScale().fitContent();
-    
-                setupTimeControls();
-                updateTimeRange('3M');
-    
-                const container = document.getElementById('chart-container');
-                const legend = document.createElement('div');
-                legend.className = 'chart-legend';
-                legend.style = `position: absolute; left: 12px; top: 12px; z-index: 1; font-size: 14px; font-family: sans-serif; line-height: 18px; font-weight: 300; color: #ffffff;`;
-                container.appendChild(legend);
-    
-                const symbolName = 'Avg. Daily % Change – Top 10 on Polymarket';
-                const firstRow = document.createElement('div');
-                let latestValue = chartData.length
-                    ? chartData[chartData.length - 1].value.toFixed(2) + '%'
-                    : '';
-                firstRow.innerHTML = `${symbolName} <strong>${latestValue}</strong>`;
-                firstRow.style.color = '#ffffff';
-                legend.appendChild(firstRow);
-    
-                chart.subscribeCrosshairMove(param => {
-                    let priceFormatted = latestValue;
-                    if (param.time) {
-                        const data = param.seriesData.get(lineSeries);
-                        if (data && (data.value !== undefined || data.close !== undefined)) {
-                            const price = data.value !== undefined ? data.value : data.close;
-                            priceFormatted = price.toFixed(2) + '%';
-                        }
-                    }
-                    firstRow.innerHTML = `${symbolName} <strong>${priceFormatted}</strong>`;
-                });
-    
-                window.addEventListener('resize', () => {
-                    chart.applyOptions({
-                        width: container.clientWidth,
-                        height: container.clientHeight,
-                    });
-                });
-    
-            } catch (error) {
-                console.error('Error setting up chart:', error);
-            }
+  <script>
+    let chart, lineSeries, chartData = [];
+
+    async function initChart() {
+      chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
+        layout: { background: { color: '#0A0A0A' }, textColor: '#ffffff' },
+        grid: {
+          vertLines: { color: 'rgba(255,255,255,0.03)' },
+          horzLines: { color: 'rgba(255,255,255,0.03)' },
+        },
+        timeScale: {
+          timeVisible: false,
+          secondsVisible: false,
+          borderColor: '#1a1a1a',
+          textColor: '#666666',
+        },
+        rightPriceScale: {
+          borderColor: '#1a1a1a',
+          textColor: '#666666',
+          minValue: 0,
+        },
+        crosshair: {
+          mode: LightweightCharts.CrosshairMode.Normal,
+          vertLine: { color: '#00E5FF', width: 1, style: 3 },
+          horzLine: { color: '#00E5FF', width: 1, style: 3 },
+        },
+      });
+
+      lineSeries = chart.addAreaSeries({
+        lineColor: '#00E5FF',
+        topColor: 'rgba(0,229,255,0.4)',
+        bottomColor: 'rgba(0,229,255,0.0)',
+        lineWidth: 2,
+        crosshairMarkerVisible: true,
+        crosshairMarkerRadius: 4,
+        priceFormat: { type: 'price', precision: 2, minMove: 0.01 },
+      });
+
+      const response = await fetch('data/daily_scores.json');
+      const rawData = await response.json();
+
+      chartData = rawData.map(item => {
+        const timeUnix = Math.floor(new Date(item.time + 'T00:00:00Z').getTime() / 1000);
+        return {
+          time: timeUnix,
+          value: Number(item.value),
+          ...(item.events ? { events: item.events } : {})
+        };
+      });
+
+      lineSeries.setData(chartData);
+      lineSeries.setMarkers(chartData.filter(d => d.events).map(d => ({
+        time: d.time,
+        position: 'aboveBar',
+        color: '#fff',
+        shape: 'circle',
+        text: ''
+      })));
+
+      chart.timeScale().fitContent();
+      setupTimeControls();
+      setupEventPopup();
+      updateTimeRange('3M');
+    }
+
+    function setupTimeControls() {
+      const buttons = document.querySelectorAll('.time-controls button');
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('active'));
+          button.classList.add('active');
+          updateTimeRange(button.dataset.range);
+        });
+      });
+      document.querySelector('button[data-range="3M"]').classList.add('active');
+    }
+
+    function updateTimeRange(range) {
+      if (!chartData.length) return;
+      const last = new Date(chartData[chartData.length - 1].time * 1000);
+      let start = new Date(last);
+      if (range === '1M') start.setMonth(last.getMonth() - 1);
+      else if (range === '3M') start.setMonth(last.getMonth() - 3);
+      else if (range === '1Y') start.setFullYear(last.getFullYear() - 1);
+      else if (range === 'ALL') { chart.timeScale().fitContent(); return; }
+      chart.timeScale().setVisibleRange({
+        from: Math.floor(start.getTime() / 1000),
+        to: Math.floor(last.getTime() / 1000),
+      });
+    }
+
+    function setupEventPopup() {
+      const popup = document.getElementById('event-popup');
+      const container = document.getElementById('chart-container');
+
+      chart.subscribeCrosshairMove(param => {
+        if (!param.time || !param.point) {
+          popup.style.display = 'none';
+          return;
         }
-    
-        function setupTimeControls() {
-            const buttons = document.querySelectorAll('.time-controls button');
-            buttons.forEach(button => {
-                button.addEventListener('click', () => {
-                    buttons.forEach(b => b.classList.remove('active'));
-                    button.classList.add('active');
-                    updateTimeRange(button.dataset.range);
-                });
-            });
-            document.querySelector('button[data-range="3M"]').classList.add('active');
+
+        const paramTime = (typeof param.time === 'object')
+          ? Math.floor(Date.UTC(param.time.year, param.time.month - 1, param.time.day) / 1000)
+          : Math.floor(param.time);
+
+        const eventData = chartData.find(d => d.time === paramTime && d.events);
+
+        if (eventData) {
+          popup.innerHTML =
+            eventData.events.map(e => `
+              <div class="event-card">
+                <div class="event-title">${e.title}</div>
+                <div class="event-value">
+                  <span class="percent">${e.value}%</span>
+                  <div class="percent-bar-bg">
+                    <div class="percent-bar-fill" style="width:${e.value}%;"></div>
+                  </div>
+                </div>
+              </div>
+            `).join('');
+
+          const containerRect = container.getBoundingClientRect();
+          const popupWidth = 200;
+          const margin = 10;
+          let leftPos;
+
+          if (param.point.x + popupWidth + margin > containerRect.width) {
+            leftPos = param.point.x - popupWidth - margin;
+          } else {
+            leftPos = param.point.x + margin;
+          }
+
+          popup.style.left = `${leftPos}px`;
+          popup.style.top = `${param.point.y}px`;
+          popup.style.display = 'block';
+        } else {
+          popup.style.display = 'none';
         }
-    
-        function updateTimeRange(range) {
-            if (!chartData.length) return;
-            const lastDataPoint = new Date(chartData[chartData.length - 1].time);
-            let startDate = new Date(lastDataPoint);
-    
-            switch (range) {
-                case '1M': startDate.setMonth(lastDataPoint.getMonth() - 1); break;
-                case '3M': startDate.setMonth(lastDataPoint.getMonth() - 3); break;
-                case '1Y': startDate.setFullYear(lastDataPoint.getFullYear() - 1); break;
-                case 'ALL':
-                    chart.timeScale().fitContent();
-                    return;
-            }
-    
-            chart.timeScale().setVisibleRange({
-                from: Math.floor(startDate.getTime() / 1000),
-                to:   Math.floor(lastDataPoint.getTime() / 1000),
-            });
-        }
-    
-        document.addEventListener('DOMContentLoaded', initChart);
-    </script>
-    
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initChart);
+  </script>
 </body>
 </html>

@@ -19,7 +19,7 @@ from scraper import (
 
 ET = ZoneInfo("America/New_York")
 
-
+# Current formula is average % daily change for top 10 markets by OI
 # ───────────────────────────── helpers ──────────────────────────────────────
 def process_single_day(date_et: datetime, all_markets: List[Dict[str, Any]]
                        ) -> Tuple[str, float]:
