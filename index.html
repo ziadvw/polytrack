@@ -128,6 +128,7 @@
                 white-space: normal;
                 margin: 0;
                 max-width: 98vw;
+                flex: 1; /* ✅ added to make it fill header width */
             }
             .header {
                 justify-content: flex-start;
@@ -177,7 +178,6 @@
     
         async function initChart() {
             try {
-                // 1) Create the chart and inject our custom crosshair labelFormatter here:
                 chart = LightweightCharts.createChart(
                     document.getElementById('chart-container'),
                     {
@@ -213,17 +213,13 @@
                                 color: '#00E5FF',
                                 width: 1,
                                 style: 3,
-                                // ← HERE is the new formatter:
                                 labelFormatter: timeValue => {
                                     let ms;
                                     if (typeof timeValue === 'object') {
-                                        // business‑day format: { year, month, day }
                                         ms = Date.UTC(timeValue.year, timeValue.month - 1, timeValue.day);
                                     } else {
-                                        // epoch seconds
                                         ms = timeValue * 1000;
                                     }
-                                    // format only the date, drop the time
                                     return new Date(ms).toLocaleDateString('en-GB', {
                                         day:   '2-digit',
                                         month: 'short',
@@ -235,14 +231,11 @@
                                 color: '#00E5FF',
                                 width: 1,
                                 style: 3,
-                                // if you also want to hide the price‐label on the left:
-                                // labelVisible: false,
                             },
                         },
                     }
                 );
     
-                // 2) Add your series and fetch data exactly as before
                 lineSeries = chart.addAreaSeries({
                     lineColor: '#00E5FF',
                     topColor: 'rgba(0, 229, 255, 0.4)',
@@ -272,7 +265,6 @@
                 setupTimeControls();
                 updateTimeRange('3M');
     
-                // 3) Legend and resize handler (unchanged)
                 const container = document.getElementById('chart-container');
                 const legend = document.createElement('div');
                 legend.className = 'chart-legend';
