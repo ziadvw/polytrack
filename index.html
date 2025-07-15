@@ -162,6 +162,7 @@
     </div>
     <div class="chart-container-wrapper">
       <div id="chart-container"></div>
+      <div class="chart-legend" style="position: absolute; left: 12px; top: 12px; z-index: 1; font-size: 14px; font-family: sans-serif; line-height: 18px; font-weight: 300; color: #ffffff;"></div>
     </div>
     <div class="time-controls">
       <button data-range="1M">1M</button>
@@ -187,6 +188,10 @@
           secondsVisible: false,
           borderColor: '#1a1a1a',
           textColor: '#666666',
+          timeFormatter: time => {
+            const date = new Date(time * 1000);
+            return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' });
+          },
         },
         rightPriceScale: {
           borderColor: '#1a1a1a',
@@ -195,7 +200,18 @@
         },
         crosshair: {
           mode: LightweightCharts.CrosshairMode.Normal,
-          vertLine: { color: '#00E5FF', width: 1, style: 3 },
+          vertLine: {
+            color: '#00E5FF', width: 1, style: 3,
+            labelFormatter: timeValue => {
+              let ms;
+              if (typeof timeValue === 'object') {
+                ms = Date.UTC(timeValue.year, timeValue.month - 1, timeValue.day);
+              } else {
+                ms = timeValue * 1000;
+              }
+              return new Date(ms).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' });
+            },
+          },
           horzLine: { color: '#00E5FF', width: 1, style: 3 },
         },
       });
@@ -235,6 +251,30 @@
       setupTimeControls();
       setupEventPopup();
       updateTimeRange('3M');
+
+      // --- LEGEND ---
+      const container = document.getElementById('chart-container');
+      const legend = document.querySelector('.chart-legend');
+      const symbolName = 'Avg. Daily % Change – Top 10 on Polymarket';
+      let latestValue = chartData.length ? chartData[chartData.length - 1].value.toFixed(2) + '%' : '';
+      legend.innerHTML = `${symbolName} <strong>${latestValue}</strong>`;
+      chart.subscribeCrosshairMove(param => {
+        let priceFormatted = latestValue;
+        if (param.time) {
+          const data = param.seriesData.get(lineSeries);
+          if (data && (data.value !== undefined || data.close !== undefined)) {
+            const price = data.value !== undefined ? data.value : data.close;
+            priceFormatted = price.toFixed(2) + '%';
+          }
+        }
+        legend.innerHTML = `${symbolName} <strong>${priceFormatted}</strong>`;
+      });
+      window.addEventListener('resize', () => {
+        chart.applyOptions({
+          width: container.clientWidth,
+          height: container.clientHeight,
+        });
+      });
     }
 
     function setupTimeControls() {
@@ -267,13 +307,14 @@
       const popup = document.getElementById('event-popup');
       const container = document.getElementById('chart-container');
 
-      let lastTouchTime = 0;
       let lastPopupTime = null;
+      let markerHitboxes = [];
 
       function showPopupAtPoint(point, time) {
         const eventData = chartData.find(d => d.time === time && d.events);
         if (eventData) {
           popup.innerHTML =
+            `<button id="event-popup-close" style="position:absolute;top:4px;right:4px;background:none;border:none;color:#fff;font-size:16px;cursor:pointer;z-index:2;">×</button>` +
             eventData.events.map(e => `
               <div class="event-card">
                 <div class="event-title">${e.title}</div>
@@ -301,6 +342,11 @@
           popup.style.top = `${point.y}px`;
           popup.style.display = 'block';
           lastPopupTime = time;
+          // Close button
+          document.getElementById('event-popup-close').onclick = function() {
+            popup.style.display = 'none';
+            lastPopupTime = null;
+          };
         } else {
           popup.style.display = 'none';
           lastPopupTime = null;
@@ -321,34 +367,36 @@
 
       // Mobile/touch support: tap to show/hide popup
       if ('ontouchstart' in window) {
+        // Calculate marker hitboxes for easier tap
+        function updateMarkerHitboxes() {
+          const timeScale = chart.timeScale();
+          markerHitboxes = chartData.filter(d => d.events).map(d => {
+            const px = timeScale.timeToCoordinate(d.time);
+            return { time: d.time, x: px };
+          });
+        }
+        chart.timeScale().subscribeVisibleLogicalRangeChange(updateMarkerHitboxes);
+        updateMarkerHitboxes();
+
         container.addEventListener('touchstart', function(e) {
           if (!chartData.length) return;
           const rect = container.getBoundingClientRect();
           const x = e.touches[0].clientX - rect.left;
           const y = e.touches[0].clientY - rect.top;
-          // Find nearest data point by x
-          const timeScale = chart.timeScale();
-          const logical = timeScale.coordinateToLogical(x);
-          const idx = Math.round(logical);
+          // Find nearest marker (circle) by x, within a tap radius
           let nearest = null;
-          let minDist = Infinity;
-          for (let i = 0; i < chartData.length; i++) {
-            const px = timeScale.logicalToCoordinate(i);
-            const dist = Math.abs(px - x);
-            if (dist < minDist) {
+          let minDist = 9999;
+          for (const m of markerHitboxes) {
+            if (m.x == null) continue;
+            const dist = Math.abs(m.x - x);
+            if (dist < minDist && dist < 24) { // 24px tap radius
               minDist = dist;
-              nearest = chartData[i];
-              nearest._px = px;
+              nearest = m;
             }
           }
-          if (nearest && nearest.events) {
-            // Toggle popup if already open for this point
-            if (lastPopupTime === nearest.time && popup.style.display === 'block') {
-              popup.style.display = 'none';
-              lastPopupTime = null;
-            } else {
-              showPopupAtPoint({x: nearest._px, y: y}, nearest.time);
-            }
+          if (nearest) {
+            // Show popup at marker
+            showPopupAtPoint({x: markerHitboxes.find(m=>m.time===nearest.time).x, y: y}, nearest.time);
           } else {
             popup.style.display = 'none';
             lastPopupTime = null;
@@ -356,7 +404,7 @@
         });
         // Hide popup on tap outside
         document.body.addEventListener('touchstart', function(e) {
-          if (!container.contains(e.target)) {
+          if (!container.contains(e.target) && !popup.contains(e.target)) {
             popup.style.display = 'none';
             lastPopupTime = null;
           }
