@@ -50,17 +50,18 @@
       left: 12px;
       top: 12px;
       z-index: 1;
-      font-size: 14px;
+      font-size: 16px;
       font-family: sans-serif;
-      line-height: 18px;
+      line-height: 20px;
       font-weight: 300;
       color: #ffffff;
       background: rgba(10,10,10,0.85);
-      padding: 4px 10px;
-      border-radius: 8px;
-      max-width: 320px;
+      padding: 5px 16px;
+      border-radius: 10px;
+      max-width: 420px;
       box-sizing: border-box;
       pointer-events: none;
+      white-space: nowrap;
     }
     @media (max-width: 600px) {
       .chart-wrapper {
@@ -72,33 +73,34 @@
         padding: 0 2px;
       }
       .title {
-        font-size: 24px;
-        letter-spacing: -0.2px;
+        font-size: 16px;
+        letter-spacing: -0.1px;
       }
       .chart-container-wrapper {
         margin-bottom: 10px;
       }
       #chart-container {
-        height: 220px;
+        height: 270px;
       }
       .time-controls button {
         padding: 6px 10px;
         font-size: 11px;
       }
       #event-popup {
-        font-size: 8.5px;
-        max-width: 120px;
-        padding: 5px;
+        font-size: 7.5px;
+        max-width: 100px;
+        padding: 4px;
       }
       .chart-legend {
-        font-size: 10px !important;
-        line-height: 13px !important;
+        font-size: 9px !important;
+        line-height: 12px !important;
         left: 4px !important;
         top: 4px !important;
-        padding: 2px 6px !important;
+        padding: 2px 5px !important;
         border-radius: 5px !important;
         max-width: 90vw !important;
         background: rgba(10,10,10,0.92) !important;
+        white-space: nowrap !important;
       }
     }
     .time-controls {
@@ -136,9 +138,9 @@
       padding: 7px;
       border-radius: 7px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      max-width: 150px;
+      max-width: 220px;
       z-index: 10;
-      font-size: 9.5px;
+      font-size: 11px;
       line-height: 1.1;
       pointer-events: none;
       border: 1px solid #1a1a1a;
