@@ -82,6 +82,15 @@
             .title {
                 font-size: 32px;
                 letter-spacing: -0.3px;
+                word-break: break-word;
+                text-align: center;
+                white-space: normal;
+                margin: 0 auto;
+                max-width: 95vw;
+            }
+            .header {
+                justify-content: center;
+                padding: 0;
             }
             #chart-container {
                 height: 250px;
@@ -89,6 +98,17 @@
             .time-controls button {
                 padding: 6px 12px;
                 font-size: 12px;
+            }
+            .chart-legend {
+                font-size: 12px !important;
+                line-height: 15px !important;
+                left: 8px !important;
+                top: 8px !important;
+                padding: 2px 6px !important;
+                border-radius: 6px !important;
+                background: rgba(10,10,10,0.85) !important;
+                max-width: 90vw !important;
+                word-break: break-word;
             }
         }
         
@@ -101,15 +121,35 @@
                 border-radius: 12px;
             }
             .title {
-                font-size: 28px;
-                letter-spacing: -0.2px;
+                font-size: 20px;
+                letter-spacing: -0.1px;
+                word-break: break-word;
+                text-align: center;
+                white-space: normal;
+                margin: 0 auto;
+                max-width: 98vw;
+            }
+            .header {
+                justify-content: center;
+                padding: 0;
             }
             #chart-container {
-                height: 200px;
+                height: 160px;
             }
             .time-controls button {
                 padding: 4px 8px;
                 font-size: 11px;
+            }
+            .chart-legend {
+                font-size: 10px !important;
+                line-height: 13px !important;
+                left: 4px !important;
+                top: 4px !important;
+                padding: 1px 4px !important;
+                border-radius: 4px !important;
+                background: rgba(10,10,10,0.85) !important;
+                max-width: 98vw !important;
+                word-break: break-word;
             }
         }
     </style>
@@ -235,6 +275,7 @@
                 // 3) Legend and resize handler (unchanged)
                 const container = document.getElementById('chart-container');
                 const legend = document.createElement('div');
+                legend.className = 'chart-legend';
                 legend.style = `position: absolute; left: 12px; top: 12px; z-index: 1; font-size: 14px; font-family: sans-serif; line-height: 18px; font-weight: 300; color: #ffffff;`;
                 container.appendChild(legend);
     
