@@ -45,6 +45,23 @@
       min-width: 0;
       box-sizing: border-box;
     }
+    .chart-legend {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      z-index: 1;
+      font-size: 14px;
+      font-family: sans-serif;
+      line-height: 18px;
+      font-weight: 300;
+      color: #ffffff;
+      background: rgba(10,10,10,0.85);
+      padding: 4px 10px;
+      border-radius: 8px;
+      max-width: 320px;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
     @media (max-width: 600px) {
       .chart-wrapper {
         padding: 8px;
@@ -72,6 +89,16 @@
         font-size: 8.5px;
         max-width: 120px;
         padding: 5px;
+      }
+      .chart-legend {
+        font-size: 10px !important;
+        line-height: 13px !important;
+        left: 4px !important;
+        top: 4px !important;
+        padding: 2px 6px !important;
+        border-radius: 5px !important;
+        max-width: 90vw !important;
+        background: rgba(10,10,10,0.92) !important;
       }
     }
     .time-controls {
@@ -314,7 +341,6 @@
         const eventData = chartData.find(d => d.time === time && d.events);
         if (eventData) {
           popup.innerHTML =
-            `<button id="event-popup-close" style="position:absolute;top:4px;right:4px;background:none;border:none;color:#fff;font-size:16px;cursor:pointer;z-index:2;">×</button>` +
             eventData.events.map(e => `
               <div class="event-card">
                 <div class="event-title">${e.title}</div>
@@ -342,11 +368,6 @@
           popup.style.top = `${point.y}px`;
           popup.style.display = 'block';
           lastPopupTime = time;
-          // Close button
-          document.getElementById('event-popup-close').onclick = function() {
-            popup.style.display = 'none';
-            lastPopupTime = null;
-          };
         } else {
           popup.style.display = 'none';
           lastPopupTime = null;
@@ -410,6 +431,13 @@
           }
         }, {passive: true});
       }
+      // Also close popup on desktop click away
+      document.body.addEventListener('mousedown', function(e) {
+        if (!container.contains(e.target) && !popup.contains(e.target)) {
+          popup.style.display = 'none';
+          lastPopupTime = null;
+        }
+      });
     }
 
     document.addEventListener('DOMContentLoaded', initChart);
