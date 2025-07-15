@@ -41,6 +41,38 @@
     }
     #chart-container {
       height: 400px;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    @media (max-width: 600px) {
+      .chart-wrapper {
+        padding: 8px;
+        border-radius: 12px;
+      }
+      .header {
+        margin-bottom: 12px;
+        padding: 0 2px;
+      }
+      .title {
+        font-size: 24px;
+        letter-spacing: -0.2px;
+      }
+      .chart-container-wrapper {
+        margin-bottom: 10px;
+      }
+      #chart-container {
+        height: 220px;
+      }
+      .time-controls button {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+      #event-popup {
+        font-size: 8.5px;
+        max-width: 120px;
+        padding: 5px;
+      }
     }
     .time-controls {
       display: flex;
@@ -235,18 +267,11 @@
       const popup = document.getElementById('event-popup');
       const container = document.getElementById('chart-container');
 
-      chart.subscribeCrosshairMove(param => {
-        if (!param.time || !param.point) {
-          popup.style.display = 'none';
-          return;
-        }
+      let lastTouchTime = 0;
+      let lastPopupTime = null;
 
-        const paramTime = (typeof param.time === 'object')
-          ? Math.floor(Date.UTC(param.time.year, param.time.month - 1, param.time.day) / 1000)
-          : Math.floor(param.time);
-
-        const eventData = chartData.find(d => d.time === paramTime && d.events);
-
+      function showPopupAtPoint(point, time) {
+        const eventData = chartData.find(d => d.time === time && d.events);
         if (eventData) {
           popup.innerHTML =
             eventData.events.map(e => `
@@ -262,23 +287,81 @@
             `).join('');
 
           const containerRect = container.getBoundingClientRect();
-          const popupWidth = 200;
+          const popupWidth = window.innerWidth < 600 ? 130 : 200;
           const margin = 10;
           let leftPos;
 
-          if (param.point.x + popupWidth + margin > containerRect.width) {
-            leftPos = param.point.x - popupWidth - margin;
+          if (point.x + popupWidth + margin > containerRect.width) {
+            leftPos = point.x - popupWidth - margin;
           } else {
-            leftPos = param.point.x + margin;
+            leftPos = point.x + margin;
           }
 
           popup.style.left = `${leftPos}px`;
-          popup.style.top = `${param.point.y}px`;
+          popup.style.top = `${point.y}px`;
           popup.style.display = 'block';
+          lastPopupTime = time;
         } else {
           popup.style.display = 'none';
+          lastPopupTime = null;
         }
+      }
+
+      chart.subscribeCrosshairMove(param => {
+        if ('ontouchstart' in window) return; // skip hover on touch devices
+        if (!param.time || !param.point) {
+          popup.style.display = 'none';
+          return;
+        }
+        const paramTime = (typeof param.time === 'object')
+          ? Math.floor(Date.UTC(param.time.year, param.time.month - 1, param.time.day) / 1000)
+          : Math.floor(param.time);
+        showPopupAtPoint(param.point, paramTime);
       });
+
+      // Mobile/touch support: tap to show/hide popup
+      if ('ontouchstart' in window) {
+        container.addEventListener('touchstart', function(e) {
+          if (!chartData.length) return;
+          const rect = container.getBoundingClientRect();
+          const x = e.touches[0].clientX - rect.left;
+          const y = e.touches[0].clientY - rect.top;
+          // Find nearest data point by x
+          const timeScale = chart.timeScale();
+          const logical = timeScale.coordinateToLogical(x);
+          const idx = Math.round(logical);
+          let nearest = null;
+          let minDist = Infinity;
+          for (let i = 0; i < chartData.length; i++) {
+            const px = timeScale.logicalToCoordinate(i);
+            const dist = Math.abs(px - x);
+            if (dist < minDist) {
+              minDist = dist;
+              nearest = chartData[i];
+              nearest._px = px;
+            }
+          }
+          if (nearest && nearest.events) {
+            // Toggle popup if already open for this point
+            if (lastPopupTime === nearest.time && popup.style.display === 'block') {
+              popup.style.display = 'none';
+              lastPopupTime = null;
+            } else {
+              showPopupAtPoint({x: nearest._px, y: y}, nearest.time);
+            }
+          } else {
+            popup.style.display = 'none';
+            lastPopupTime = null;
+          }
+        });
+        // Hide popup on tap outside
+        document.body.addEventListener('touchstart', function(e) {
+          if (!container.contains(e.target)) {
+            popup.style.display = 'none';
+            lastPopupTime = null;
+          }
+        }, {passive: true});
+      }
     }
 
     document.addEventListener('DOMContentLoaded', initChart);
