@@ -37,7 +37,21 @@
   },
   {
     "time": "2024-01-10",
-    "value": 8.23
+    "value": 8.23,
+    "events": [
+      {
+        "title": "Will the final global heat increase be 1.05 or greater for 2023?",
+        "value": 38.25
+      },
+      {
+        "title": "Bitcoin ETF approved by Jan 15?",
+        "value": 14.95
+      },
+      {
+        "title": "Who will get more votes in Taiwan Election: Hou Yu-ih (\u4faf\u53cb\u5b9c) or Ko Wen-je (\u67ef\u6587\u54f2)?",
+        "value": 14.5
+      }
+    ]
   },
   {
     "time": "2024-01-11",
@@ -89,7 +103,13 @@
   },
   {
     "time": "2024-01-23",
-    "value": 8.615
+    "value": 8.615,
+    "events": [
+      {
+        "title": "Trump margin of victory in New Hampshire Primary >15%",
+        "value": 66.25
+      }
+    ]
   },
   {
     "time": "2024-01-24",
@@ -757,7 +777,25 @@
   },
   {
     "time": "2024-07-08",
-    "value": 12.235000000000001
+    "value": 12.235000000000001,
+    "events": [
+      {
+        "title": "Trump and Biden both win nomination?",
+        "value": 29.5
+      },
+      {
+        "title": "Will Joe Biden win the 2024 Democratic Presidential Nomination?",
+        "value": 24.5
+      },
+      {
+        "title": "[Single Market] Will Joe Biden win the U.S. 2024 Democratic presidential nomination?",
+        "value": 24.5
+      },
+      {
+        "title": "Biden drops out of presidential race?",
+        "value": 23.5
+      }
+    ]
   },
   {
     "time": "2024-07-09",
@@ -765,7 +803,25 @@
   },
   {
     "time": "2024-07-10",
-    "value": 10.205000000000002
+    "value": 10.205000000000002,
+    "events": [
+      {
+        "title": "Trump and Biden both win nomination?",
+        "value": 26.0
+      },
+      {
+        "title": "[Single Market] Will Joe Biden win the U.S. 2024 Democratic presidential nomination?",
+        "value": 23.5
+      },
+      {
+        "title": "Will Joe Biden win the 2024 Democratic Presidential Nomination?",
+        "value": 21.5
+      },
+      {
+        "title": "Biden wins the Popular Vote?",
+        "value": 15.0
+      }
+    ]
   },
   {
     "time": "2024-07-11",
@@ -793,11 +849,59 @@
   },
   {
     "time": "2024-07-17",
-    "value": 17.160000000000004
+    "value": 17.160000000000004,
+    "events": [
+      {
+        "title": "[Single Market] Will Joe Biden win the U.S. 2024 Democratic presidential nomination?",
+        "value": 38.5
+      },
+      {
+        "title": "Will Joe Biden win the 2024 Democratic Presidential Nomination?",
+        "value": 37.0
+      },
+      {
+        "title": "Trump and Biden both win nomination?",
+        "value": 31.5
+      },
+      {
+        "title": "Biden drops out of presidential race?",
+        "value": 29.0
+      },
+      {
+        "title": "Biden wins the Popular Vote?",
+        "value": 16.0
+      },
+      {
+        "title": "Will Biden finish his term?",
+        "value": 10.5
+      }
+    ]
   },
   {
     "time": "2024-07-18",
-    "value": 12.91
+    "value": 12.91,
+    "events": [
+      {
+        "title": "Trump and Biden both win nomination?",
+        "value": 31.0
+      },
+      {
+        "title": "Will Joe Biden win the 2024 Democratic Presidential Nomination?",
+        "value": 26.5
+      },
+      {
+        "title": "[Single Market] Will Joe Biden win the U.S. 2024 Democratic presidential nomination?",
+        "value": 24.5
+      },
+      {
+        "title": "Biden drops out of presidential race?",
+        "value": 22.0
+      },
+      {
+        "title": "Biden wins the Popular Vote?",
+        "value": 13.5
+      }
+    ]
   },
   {
     "time": "2024-07-19",
@@ -809,7 +913,33 @@
   },
   {
     "time": "2024-07-21",
-    "value": 19.904999999999998
+    "value": 19.904999999999998,
+    "events": [
+      {
+        "title": "Biden drops out in July? ",
+        "value": 58.25
+      },
+      {
+        "title": "Will Joe Biden win the 2024 Democratic Presidential Nomination?",
+        "value": 31.35
+      },
+      {
+        "title": "Biden drops out of presidential race?",
+        "value": 29.35
+      },
+      {
+        "title": "Trump and Biden both win nomination?",
+        "value": 29.35
+      },
+      {
+        "title": "[Single Market] Will Joe Biden win the U.S. 2024 Democratic presidential nomination?",
+        "value": 29.1
+      },
+      {
+        "title": "Biden wins the Popular Vote?",
+        "value": 10.9
+      }
+    ]
   },
   {
     "time": "2024-07-22",
@@ -869,7 +999,21 @@
   },
   {
     "time": "2024-08-05",
-    "value": 10.080000000000002
+    "value": 10.080000000000002,
+    "events": [
+      {
+        "title": "Will Nicolas Maduro Win the 2024 Venezuela presidential election?",
+        "value": 42.05
+      },
+      {
+        "title": "2024 July hottest on record?",
+        "value": 34.5
+      },
+      {
+        "title": "Will Josh Shapiro be the 2024 Democratic VP nominee?",
+        "value": 17.5
+      }
+    ]
   },
   {
     "time": "2024-08-06",
@@ -1237,11 +1381,51 @@
   },
   {
     "time": "2024-11-05",
-    "value": 13.224999999999998
+    "value": 13.224999999999998,
+    "events": [
+      {
+        "title": "Kamala Harris wins the popular vote?",
+        "value": 28.35
+      },
+      {
+        "title": "Will Donald Trump win the 2024 US Presidential Election?",
+        "value": 23.55
+      },
+      {
+        "title": "Will a Democrat win Michigan Presidential Election?",
+        "value": 22.5
+      },
+      {
+        "title": "Trump wins every swing state?",
+        "value": 22.0
+      },
+      {
+        "title": "Will a Republican win the popular vote and the Presidency? ",
+        "value": 20.0
+      },
+      {
+        "title": "Will a Republican win Pennsylvania Presidential Election?",
+        "value": 15.0
+      }
+    ]
   },
   {
     "time": "2024-11-06",
-    "value": 8.680000000000001
+    "value": 8.680000000000001,
+    "events": [
+      {
+        "title": "2024 Balance of Power: R Prez R Senate R House",
+        "value": 27.95
+      },
+      {
+        "title": "Trump wins every swing state?",
+        "value": 21.2
+      },
+      {
+        "title": "Will a Republican win the popular vote and the Presidency? ",
+        "value": 10.8
+      }
+    ]
   },
   {
     "time": "2024-11-07",
@@ -1317,7 +1501,25 @@
   },
   {
     "time": "2024-11-25",
-    "value": 9.615
+    "value": 9.615,
+    "events": [
+      {
+        "title": "Will Bitcoin hit $100k in November?",
+        "value": 29.5
+      },
+      {
+        "title": "Will \u22652% of votes go to 3rd Party candidates?",
+        "value": 27.25
+      },
+      {
+        "title": "Will Bitcoin reach $105,000 in November?",
+        "value": 18.0
+      },
+      {
+        "title": "Will Bitcoin hit $100k in 2024?",
+        "value": 13.7
+      }
+    ]
   },
   {
     "time": "2024-11-26",
@@ -1621,7 +1823,13 @@
   },
   {
     "time": "2025-02-09",
-    "value": 10.895
+    "value": 10.895,
+    "events": [
+      {
+        "title": "Will the Eagles win Super Bowl 2025?",
+        "value": 52.4
+      }
+    ]
   },
   {
     "time": "2025-02-10",
@@ -2013,7 +2221,21 @@
   },
   {
     "time": "2025-05-18",
-    "value": 9.645
+    "value": 9.645,
+    "events": [
+      {
+        "title": "Will Nicu\u0219or Dan win the Romanian presidential election?",
+        "value": 54.3
+      },
+      {
+        "title": "Will Rafa\u0142 Trzaskowski be the next President of Poland?",
+        "value": 18.0
+      },
+      {
+        "title": "Will Dan or Simion win the diaspora vote?",
+        "value": 13.8
+      }
+    ]
   },
   {
     "time": "2025-05-19",
