@@ -40,7 +40,7 @@
             margin-bottom: 20px;
         }
         #chart-container {
-            height: 600px;
+            height: 400px;
         }
         .time-controls {
             display: flex;
@@ -84,7 +84,7 @@
                 letter-spacing: -0.3px;
             }
             #chart-container {
-                height: 400px;
+                height: 250px;
             }
             .time-controls button {
                 padding: 6px 12px;
@@ -105,7 +105,7 @@
                 letter-spacing: -0.2px;
             }
             #chart-container {
-                height: 300px;
+                height: 200px;
             }
             .time-controls button {
                 padding: 4px 8px;
@@ -134,42 +134,75 @@
         let chart;
         let lineSeries;
         let chartData = [];
-
+    
         async function initChart() {
             try {
-                chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
-                    layout: {
-                        background: { color: '#0A0A0A' },
-                        textColor: '#ffffff',
-                    },
-                    grid: {
-                        vertLines: { color: 'rgba(255, 255, 255, 0.03)' },
-                        horzLines: { color: 'rgba(255, 255, 255, 0.03)' },
-                    },
-                    timeScale: {
-                        timeVisible: true,
-                        borderColor: '#1a1a1a',
-                        textColor: '#666666',
-                    },
-                    rightPriceScale: {
-                        borderColor: '#1a1a1a',
-                        textColor: '#666666',
-                    },
-                    crosshair: {
-                        mode: LightweightCharts.CrosshairMode.Normal,
-                        vertLine: {
-                            color: '#00E5FF',
-                            width: 1,
-                            style: 3,
+                // 1) Create the chart and inject our custom crosshair labelFormatter here:
+                chart = LightweightCharts.createChart(
+                    document.getElementById('chart-container'),
+                    {
+                        layout: {
+                            background: { color: '#0A0A0A' },
+                            textColor: '#ffffff',
                         },
-                        horzLine: {
-                            color: '#00E5FF',
-                            width: 1,
-                            style: 3,
+                        grid: {
+                            vertLines: { color: 'rgba(255, 255, 255, 0.03)' },
+                            horzLines: { color: 'rgba(255, 255, 255, 0.03)' },
                         },
-                    },
-                });
-
+                        timeScale: {
+                            timeVisible: false,
+                            secondsVisible: false,
+                            borderColor: '#1a1a1a',
+                            textColor: '#666666',
+                            timeFormatter: time => {
+                                const date = new Date(time * 1000);
+                                return date.toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: '2-digit'
+                                });
+                            },
+                        },
+                        rightPriceScale: {
+                            borderColor: '#1a1a1a',
+                            textColor: '#666666',
+                        },
+                        crosshair: {
+                            mode: LightweightCharts.CrosshairMode.Normal,
+                            vertLine: {
+                                color: '#00E5FF',
+                                width: 1,
+                                style: 3,
+                                // ← HERE is the new formatter:
+                                labelFormatter: timeValue => {
+                                    let ms;
+                                    if (typeof timeValue === 'object') {
+                                        // business‑day format: { year, month, day }
+                                        ms = Date.UTC(timeValue.year, timeValue.month - 1, timeValue.day);
+                                    } else {
+                                        // epoch seconds
+                                        ms = timeValue * 1000;
+                                    }
+                                    // format only the date, drop the time
+                                    return new Date(ms).toLocaleDateString('en-GB', {
+                                        day:   '2-digit',
+                                        month: 'short',
+                                        year:  '2-digit',
+                                    });
+                                },
+                            },
+                            horzLine: {
+                                color: '#00E5FF',
+                                width: 1,
+                                style: 3,
+                                // if you also want to hide the price‐label on the left:
+                                // labelVisible: false,
+                            },
+                        },
+                    }
+                );
+    
+                // 2) Add your series and fetch data exactly as before
                 lineSeries = chart.addAreaSeries({
                     lineColor: '#00E5FF',
                     topColor: 'rgba(0, 229, 255, 0.4)',
@@ -183,43 +216,37 @@
                         minMove: 0.01,
                     },
                 });
-
-                const response = await fetch('data/daily_scores.json');  // ✅ updated here
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+    
+                const response = await fetch('data/daily_scores.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const rawData = await response.json();
-
-                // Transform to { time, value } array with numeric value
+    
                 chartData = rawData.map(item => ({
                     time: item.time,
                     value: Number(item.value),
                 }));
-
+    
                 lineSeries.setData(chartData);
                 chart.timeScale().fitContent();
-
+    
                 setupTimeControls();
                 updateTimeRange('3M');
-
-                // Add legend following official example
+    
+                // 3) Legend and resize handler (unchanged)
                 const container = document.getElementById('chart-container');
                 const legend = document.createElement('div');
                 legend.style = `position: absolute; left: 12px; top: 12px; z-index: 1; font-size: 14px; font-family: sans-serif; line-height: 18px; font-weight: 300; color: #ffffff;`;
                 container.appendChild(legend);
-
+    
                 const symbolName = 'Avg. Daily % Change – Top 10 on Polymarket';
-
                 const firstRow = document.createElement('div');
-                // Show latest value by default
-                let latestValue = '';
-                if (chartData.length > 0) {
-                    latestValue = chartData[chartData.length - 1].value.toFixed(2) + '%';
-                }
+                let latestValue = chartData.length
+                    ? chartData[chartData.length - 1].value.toFixed(2) + '%'
+                    : '';
                 firstRow.innerHTML = `${symbolName} <strong>${latestValue}</strong>`;
                 firstRow.style.color = '#ffffff';
                 legend.appendChild(firstRow);
-
+    
                 chart.subscribeCrosshairMove(param => {
                     let priceFormatted = latestValue;
                     if (param.time) {
@@ -231,19 +258,19 @@
                     }
                     firstRow.innerHTML = `${symbolName} <strong>${priceFormatted}</strong>`;
                 });
-
+    
                 window.addEventListener('resize', () => {
-                    const container = document.getElementById('chart-container');
                     chart.applyOptions({
                         width: container.clientWidth,
                         height: container.clientHeight,
                     });
                 });
+    
             } catch (error) {
                 console.error('Error setting up chart:', error);
             }
         }
-
+    
         function setupTimeControls() {
             const buttons = document.querySelectorAll('.time-controls button');
             buttons.forEach(button => {
@@ -255,35 +282,29 @@
             });
             document.querySelector('button[data-range="3M"]').classList.add('active');
         }
-
+    
         function updateTimeRange(range) {
             if (!chartData.length) return;
-
             const lastDataPoint = new Date(chartData[chartData.length - 1].time);
             let startDate = new Date(lastDataPoint);
-
+    
             switch (range) {
-                case '1M':
-                    startDate.setMonth(lastDataPoint.getMonth() - 1);
-                    break;
-                case '3M':
-                    startDate.setMonth(lastDataPoint.getMonth() - 3);
-                    break;
-                case '1Y':
-                    startDate.setFullYear(lastDataPoint.getFullYear() - 1);
-                    break;
+                case '1M': startDate.setMonth(lastDataPoint.getMonth() - 1); break;
+                case '3M': startDate.setMonth(lastDataPoint.getMonth() - 3); break;
+                case '1Y': startDate.setFullYear(lastDataPoint.getFullYear() - 1); break;
                 case 'ALL':
                     chart.timeScale().fitContent();
                     return;
             }
-
+    
             chart.timeScale().setVisibleRange({
                 from: Math.floor(startDate.getTime() / 1000),
-                to: Math.floor(lastDataPoint.getTime() / 1000),
+                to:   Math.floor(lastDataPoint.getTime() / 1000),
             });
         }
-
+    
         document.addEventListener('DOMContentLoaded', initChart);
     </script>
+    
 </body>
 </html>
