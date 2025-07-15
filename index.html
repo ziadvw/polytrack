@@ -202,6 +202,36 @@
                 setupTimeControls();
                 updateTimeRange('3M');
 
+                // Add legend following official example
+                const container = document.getElementById('chart-container');
+                const legend = document.createElement('div');
+                legend.style = `position: absolute; left: 12px; top: 12px; z-index: 1; font-size: 14px; font-family: sans-serif; line-height: 18px; font-weight: 300; color: #ffffff;`;
+                container.appendChild(legend);
+
+                const symbolName = 'Avg. Daily % Change – Top 10 on Polymarket';
+
+                const firstRow = document.createElement('div');
+                // Show latest value by default
+                let latestValue = '';
+                if (chartData.length > 0) {
+                    latestValue = chartData[chartData.length - 1].value.toFixed(2) + '%';
+                }
+                firstRow.innerHTML = `${symbolName} <strong>${latestValue}</strong>`;
+                firstRow.style.color = '#ffffff';
+                legend.appendChild(firstRow);
+
+                chart.subscribeCrosshairMove(param => {
+                    let priceFormatted = latestValue;
+                    if (param.time) {
+                        const data = param.seriesData.get(lineSeries);
+                        if (data && (data.value !== undefined || data.close !== undefined)) {
+                            const price = data.value !== undefined ? data.value : data.close;
+                            priceFormatted = price.toFixed(2) + '%';
+                        }
+                    }
+                    firstRow.innerHTML = `${symbolName} <strong>${priceFormatted}</strong>`;
+                });
+
                 window.addEventListener('resize', () => {
                     const container = document.getElementById('chart-container');
                     chart.applyOptions({
