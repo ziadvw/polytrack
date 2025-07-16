@@ -4,7 +4,7 @@
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "openInterest": "4361112177020",
-    "priceChange": -0.65
+    "priceChange": -0.7
   },
   {
     "conditionId": "0x8ee2f1640386310eb5e7ffa596ba9335f2d324e303d21b0dfea6998874445791",
@@ -18,28 +18,28 @@
     "tokenId": "73793697275923646355831824753345919471011673129768736520616870696302293395247",
     "question": "No change in Fed interest rates after July 2025 meeting?",
     "openInterest": "1996646897761",
-    "priceChange": 0.3
+    "priceChange": 0.2
   },
   {
     "conditionId": "0xebfd12ede5c2ef43189c4f37701ca7137e84a7b0cc25741d5ce223bbdc49f47f",
     "tokenId": "32472689363633232251888735842780829434506566435025707987014623316114512196519",
     "question": "Will Bitcoin reach $150K in July?",
     "openInterest": "1923976081861",
-    "priceChange": 0.8
+    "priceChange": 0.9
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
     "tokenId": "75505728818237076147318796536066812362152358606307154083407489467059230821371",
     "question": "Khamenei out as Supreme Leader of Iran in 2025?",
     "openInterest": "1700132181021",
-    "priceChange": 1.5
+    "priceChange": 0.5
   },
   {
     "conditionId": "0xab6faa3e66abacc484bbb4bd31ae5e2a56d6f6252b5023631f1bd9e5299fa2f8",
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": "1629103938665",
-    "priceChange": -0.45
+    "priceChange": -0.3
   },
   {
     "conditionId": "0xcb1531b00e984865530f13e4ce35bcbc7d71615af98827b5e9aee2ca2984b626",
@@ -53,7 +53,7 @@
     "tokenId": "13482242778366768315395030326922727504294085396864365135248842419774074207478",
     "question": "Will Ethereum reach $4000 in July?",
     "openInterest": "1168617381515",
-    "priceChange": 12.85
+    "priceChange": 14.8
   },
   {
     "conditionId": "0xf2ce8d3897ac5009a131637d3575f1f91c579bd08eecce6ae2b2da0f32bbe6f1",
@@ -67,6 +67,6 @@
     "tokenId": "44446628319261786751896876365833910598445252343588252409740203088317210950410",
     "question": "Will Trump remove Jerome Powell in 2025?",
     "openInterest": "1152448279707",
-    "priceChange": -2.0
+    "priceChange": -2.5
   }
 ]
