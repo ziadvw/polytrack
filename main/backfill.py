@@ -22,8 +22,8 @@ ET = ZoneInfo("America/New_York")
 # Current formula is average % daily change for top 10 markets by OI
 # ───────────────────────────── helpers ──────────────────────────────────────
 def process_single_day(date_et: datetime, all_markets: List[Dict[str, Any]]
-                       ) -> Tuple[str, float]:
-    """Return (YYYY-MM-DD, avg % change) for one day."""
+                       ) -> Tuple[str, float, List[Dict[str, Any]]]:
+    """Return (YYYY-MM-DD, avg % change, top10 with price changes) for one day."""
     day_str = f"{date_et:%Y-%m-%d}"
     day_start = date_et.replace(hour=0, minute=0, second=0, microsecond=0)
     day_end   = day_start + timedelta(days=1)
@@ -31,19 +31,30 @@ def process_single_day(date_et: datetime, all_markets: List[Dict[str, Any]]
     ts_end    = int(day_end.timestamp())
 
     day_markets = filter_markets_by_date(all_markets, day_start, day_end)
-    id_map = {m["conditionId"]: m["tokenId"] for m in day_markets if m.get("tokenId")}
+    id_map = {m["conditionId"]: m for m in day_markets if m.get("tokenId")}
 
     top = get_ois(day_markets, unix_timestamp=ts_start, top_n=10)
     if not top:
-        return day_str, 0.0
+        return day_str, 0.0, []
 
-    changes = [
-        abs(get_day_price_change(id_map[cid["id"]], ts_start, ts_end))
-        for cid in top
-        if cid["id"] in id_map
-    ]
-    avg = sum(changes) / len(changes) if changes else 0.0
-    return day_str, round(avg, 3)
+    top10_with_changes = []
+    total_abs = 0.0
+    for cid in top:
+        cond_id = cid["id"]
+        m = id_map.get(cond_id)
+        if not m:
+            continue
+        token_id = m["tokenId"]
+        change = get_day_price_change(token_id, ts_start, ts_end)
+        top10_with_changes.append({
+            "conditionId": cond_id,
+            "tokenId": token_id,
+            "question": m.get("question"),
+            "priceChange": round(change, 3)
+        })
+        total_abs += abs(change)
+    avg = sum(abs(m["priceChange"]) for m in top10_with_changes) / len(top10_with_changes) if top10_with_changes else 0.0
+    return day_str, round(avg, 3), top10_with_changes
 
 
 def write_scores(series: List[Dict[str, Any]], out_file: Path) -> None:
@@ -77,7 +88,25 @@ def backfill_scores(
     with Pool(n_proc) as pool:
         results = pool.starmap(process_single_day, [(d, markets) for d in dates])
 
-    series = [{"time": d, "value": v} for d, v in sorted(results, key=lambda t: t[0])]
+    series = []
+    for d, v, top10 in sorted(results, key=lambda t: t[0]):
+        entry = {"time": d, "value": v}
+        events = []
+        if v > 8:
+            # get top 10 markets with abs(priceChange) > 10%, ranked by abs(priceChange)
+            top10_high_movers = sorted(
+                [m for m in top10 if abs(m.get("priceChange", 0)) > 10],
+                key=lambda m: abs(m["priceChange"]),
+                reverse=True
+            )
+            for m in top10_high_movers:
+                events.append({
+                    "title": m.get("question", "Unknown"),
+                    "value": m["priceChange"]  # keep signed value
+                })
+        if events:
+            entry["events"] = events
+        series.append(entry)
 
     # write
     suffix = f"{start_date:%Y-%m-%d}" if start_date == end_date \
@@ -89,17 +118,66 @@ def backfill_scores(
 # ───────────────────────── CLI entrypoint ───────────────────────────────────
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="Backfill daily scores")
-    ap.add_argument("start_date", help="YYYY-MM-DD")
-    ap.add_argument("end_date", nargs="?", help="YYYY-MM-DD (optional)")
+    ap.add_argument("dates", nargs="+", help="YYYY-MM-DD[,YYYY-MM-DD,...] or start end")
     ap.add_argument("-m", "--markets-file", dest="markets_file",
                     help="Existing markets JSON (else scrape fresh)")
     ns = ap.parse_args()
 
+    # Support for comma-separated list or range
+    date_args = ns.dates
+    dates_list = []
     try:
-        start_dt = datetime.strptime(ns.start_date, "%Y-%m-%d").replace(tzinfo=ET)
-        end_dt   = datetime.strptime(ns.end_date, "%Y-%m-%d").replace(tzinfo=ET) \
-                   if ns.end_date else start_dt
+        if len(date_args) == 1 and "," in date_args[0]:
+            # Comma-separated list
+            dates_list = [datetime.strptime(d.strip(), "%Y-%m-%d").replace(tzinfo=ET) for d in date_args[0].split(",")]
+        elif len(date_args) == 2:
+            # Range
+            start_dt = datetime.strptime(date_args[0], "%Y-%m-%d").replace(tzinfo=ET)
+            end_dt   = datetime.strptime(date_args[1], "%Y-%m-%d").replace(tzinfo=ET)
+            cur = start_dt
+            while cur <= end_dt:
+                dates_list.append(cur)
+                cur += timedelta(days=1)
+        elif len(date_args) == 1:
+            # Single date
+            dates_list = [datetime.strptime(date_args[0], "%Y-%m-%d").replace(tzinfo=ET)]
+        else:
+            raise ValueError("Invalid date arguments")
     except ValueError as e:
         raise SystemExit(f"❌  Invalid date: {e}")
 
-    backfill_scores(start_dt, end_dt, ns.markets_file)
+    def custom_backfill(dates, markets_file=None):
+        if markets_file:
+            with open(markets_file, encoding="utf-8") as fp:
+                markets = json.load(fp)
+        else:
+            markets = scrape_markets(active=False)
+        n_proc = max(1, cpu_count() - 1)
+        with Pool(n_proc) as pool:
+            results = pool.starmap(process_single_day, [(d, markets) for d in dates])
+        series = []
+        for d, v, top10 in sorted(results, key=lambda t: t[0]):
+            entry = {"time": d, "value": v}
+            events = []
+            if v > 8:
+                top10_high_movers = sorted(
+                    [m for m in top10 if abs(m.get("priceChange", 0)) > 10],
+                    key=lambda m: abs(m["priceChange"]),
+                    reverse=True
+                )
+                for m in top10_high_movers:
+                    events.append({
+                        "title": m.get("question", "Unknown"),
+                        "value": m["priceChange"]
+                    })
+            if events:
+                entry["events"] = events
+            series.append(entry)
+        if len(dates) == 1:
+            suffix = f"{dates[0]:%Y-%m-%d}"
+        else:
+            suffix = f"{dates[0]:%Y-%m-%d}-{dates[-1]:%Y-%m-%d}"
+        out_path = Path("data/backfills/scores") / f"scores_{suffix}.json"
+        write_scores(series, out_path)
+
+    custom_backfill(dates_list, ns.markets_file)

@@ -1,0 +1,24 @@
+[
+  {
+    "time": "2025-05-18",
+    "value": 9.645,
+    "events": [
+      {
+        "title": "Will Nicu\u0219or Dan win the Romanian presidential election?",
+        "value": 54.3
+      },
+      {
+        "title": "Will Rafa\u0142 Trzaskowski be the next President of Poland?",
+        "value": -18.0
+      },
+      {
+        "title": "Will Dan or Simion win the diaspora vote?",
+        "value": -13.8
+      }
+    ]
+  },
+  {
+    "time": "2025-05-20",
+    "value": 1.59
+  }
+]

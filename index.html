@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PolyVol Chart</title>
+  <title>Polytrack</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
   <style>
@@ -208,6 +208,107 @@
         padding-left: 6px;
       }
     }
+    /* Event popup styles */
+    #event-popup {
+      display: none;
+      position: absolute;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 7px;
+      border-radius: 7px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      max-width: 220px;
+      z-index: 10;
+      font-size: 11px;
+      line-height: 1.1;
+      pointer-events: none;
+      border: 1px solid #1a1a1a;
+    }
+    #event-popup .event-card {
+      background: #181c22;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      padding: 6px 7px 4px 7px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    #event-popup .event-title {
+      font-size: 8px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    #event-popup .event-value {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    #event-popup .event-value .percent-container {
+      display: flex;
+      align-items: center;
+      min-width: 54px;
+      max-width: 54px;
+      justify-content: flex-start;
+      padding-left: 2px;
+    }
+    #event-popup .event-value .arrow {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      margin-right: 2px;
+    }
+    #event-popup .percent.up {
+      color: #00FFA3;
+    }
+    #event-popup .percent.down {
+      color: #FF4C4C;
+    }
+    #event-popup .percent.neutral {
+      color: #cccccc;
+    }
+    #event-popup .percent {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #00E5FF;
+      min-width: 24px;
+      text-align: right;
+    }
+    #event-popup .percent-bar-bg {
+      flex: 1;
+      height: 4.5px;
+      background: #222;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    #event-popup .percent-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00E5FF 60%, #00FFA3 100%);
+      border-radius: 2px;
+    }
+    .feedback-btn {
+      display: inline-block;
+      background: none;
+      color: #888;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      font-size: 15px;
+      font-weight: 400;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: none;
+      transition: color 0.2s;
+    }
+    .feedback-btn:hover {
+      color: #00E5FF;
+      text-decoration: underline;
+    }
+    .feedback-btn-row {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 8px;
+      margin-top: 24px;
+      margin-bottom: 4px;
+    }
   </style>
 </head>
 <body>
@@ -230,9 +331,13 @@
       <button data-range="1Y">1Y</button>
       <button data-range="ALL">ALL</button>
     </div>
+    <div id="event-popup"></div>
     <div class="top-movers">
       <div class="top-movers-title">Today's Top Movers</div>
       <div class="top-movers-list" id="top-movers-list"></div>
+    </div>
+    <div class="feedback-btn-row">
+      <button class="feedback-btn" onclick="window.open('mailto:zeyadd42@gmail.com?subject=Polytrack%20Feedback','_blank')">Send feedback</button>
     </div>
   </div>
 
@@ -273,6 +378,7 @@
 
       chart.timeScale().fitContent();
       setupTimeControls();
+      setupEventPopup();
       updateTimeRange('3M');
       setupLegend();
       loadTopMovers();
@@ -369,6 +475,134 @@
       } catch (err) {
         console.error('Error loading top10 data:', err);
       }
+    }
+
+    function setupEventPopup() {
+      const popup = document.getElementById('event-popup');
+      const container = document.getElementById('chart-container');
+
+      let lastPopupTime = null;
+      let markerHitboxes = [];
+
+      function showPopupAtPoint(point, time) {
+        const eventData = chartData.find(d => d.time === time && d.events);
+        if (eventData) {
+          popup.innerHTML =
+            eventData.events.map(e => {
+              let direction, arrowSvg, percentClass;
+              if (e.value > 0) {
+                direction = 'up';
+                arrowSvg = '<span class="arrow" style="color:#00FFA3;">'+
+                  '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l6 8h-4v8h-4v-8h-4z"/></svg></span>';
+                percentClass = 'up';
+              } else if (e.value < 0) {
+                direction = 'down';
+                arrowSvg = '<span class="arrow" style="color:#FF4C4C;">'+
+                  '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-6-8h4v-8h4v8h4z"/></svg></span>';
+                percentClass = 'down';
+              } else {
+                direction = 'neutral';
+                arrowSvg = '<span class="arrow" style="color:#cccccc;">–</span>';
+                percentClass = 'neutral';
+              }
+              return `
+                <div class="event-card">
+                  <div class="event-title">${e.title}</div>
+                  <div class="event-value">
+                    <span class="percent-container">${arrowSvg}<span class="percent ${percentClass}">${e.value > 0 ? '+' : ''}${e.value}%</span></span>
+                    <div class="percent-bar-bg">
+                      <div class="percent-bar-fill" style="width:${Math.abs(e.value)}%;"></div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('');
+
+          const containerRect = container.getBoundingClientRect();
+          const popupWidth = window.innerWidth < 600 ? 130 : 200;
+          const margin = 10;
+          let leftPos;
+
+          if (point.x + popupWidth + margin > containerRect.width) {
+            leftPos = point.x - popupWidth - margin;
+          } else {
+            leftPos = point.x + margin;
+          }
+
+          popup.style.left = `${leftPos}px`;
+          popup.style.top = `${point.y}px`;
+          popup.style.display = 'block';
+          lastPopupTime = time;
+        } else {
+          popup.style.display = 'none';
+          lastPopupTime = null;
+        }
+      }
+
+      chart.subscribeCrosshairMove(param => {
+        if ('ontouchstart' in window) return; // skip hover on touch devices
+        if (!param.time || !param.point) {
+          popup.style.display = 'none';
+          return;
+        }
+        const paramTime = (typeof param.time === 'object')
+          ? Math.floor(Date.UTC(param.time.year, param.time.month - 1, param.time.day) / 1000)
+          : Math.floor(param.time);
+        showPopupAtPoint(param.point, paramTime);
+      });
+
+      // Mobile/touch support: tap to show/hide popup
+      if ('ontouchstart' in window) {
+        // Calculate marker hitboxes for easier tap
+        function updateMarkerHitboxes() {
+          const timeScale = chart.timeScale();
+          markerHitboxes = chartData.filter(d => d.events).map(d => {
+            const px = timeScale.timeToCoordinate(d.time);
+            return { time: d.time, x: px };
+          });
+        }
+        chart.timeScale().subscribeVisibleLogicalRangeChange(updateMarkerHitboxes);
+        updateMarkerHitboxes();
+
+        container.addEventListener('touchstart', function(e) {
+          if (!chartData.length) return;
+          const rect = container.getBoundingClientRect();
+          const x = e.touches[0].clientX - rect.left;
+          const y = e.touches[0].clientY - rect.top;
+          // Find nearest marker (circle) by x, within a tap radius
+          let nearest = null;
+          let minDist = 9999;
+          for (const m of markerHitboxes) {
+            if (m.x == null) continue;
+            const dist = Math.abs(m.x - x);
+            if (dist < minDist && dist < 24) { // 24px tap radius
+              minDist = dist;
+              nearest = m;
+            }
+          }
+          if (nearest) {
+            // Show popup at marker
+            showPopupAtPoint({x: markerHitboxes.find(m=>m.time===nearest.time).x, y: y}, nearest.time);
+          } else {
+            popup.style.display = 'none';
+            lastPopupTime = null;
+          }
+        });
+        // Hide popup on tap outside
+        document.body.addEventListener('touchstart', function(e) {
+          if (!container.contains(e.target) && !popup.contains(e.target)) {
+            popup.style.display = 'none';
+            lastPopupTime = null;
+          }
+        }, {passive: true});
+      }
+      // Also close popup on desktop click away
+      document.body.addEventListener('mousedown', function(e) {
+        if (!container.contains(e.target) && !popup.contains(e.target)) {
+          popup.style.display = 'none';
+          lastPopupTime = null;
+        }
+      });
     }
 
     document.addEventListener('DOMContentLoaded', initChart);
