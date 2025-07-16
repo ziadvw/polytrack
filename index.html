@@ -86,11 +86,6 @@
         padding: 6px 10px;
         font-size: 11px;
       }
-      #event-popup {
-        font-size: 7.5px;
-        max-width: 100px;
-        padding: 4px;
-      }
       .chart-legend {
         font-size: 9px !important;
         line-height: 12px !important;
@@ -99,8 +94,6 @@
         padding: 2px 5px !important;
         border-radius: 5px !important;
         max-width: 90vw !important;
-        background: rgba(10,10,10,0.92) !important;
-        white-space: nowrap !important;
       }
     }
     .time-controls {
@@ -130,57 +123,62 @@
       background: rgba(255, 255, 255, 0.1);
       color: #00E5FF;
     }
-    #event-popup {
-      display: none;
-      position: absolute;
-      background: #1a1a1a;
-      color: #fff;
-      padding: 7px;
-      border-radius: 7px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      max-width: 220px;
-      z-index: 10;
-      font-size: 11px;
-      line-height: 1.1;
-      pointer-events: none;
+    .top-movers {
+      margin-top: 30px;
+      background: #0A0A0A;
       border: 1px solid #1a1a1a;
+      border-radius: 16px;
+      padding: 16px;
     }
-    #event-popup .event-card {
+    .top-movers-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+    .top-movers-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mover-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       background: #181c22;
-      border-radius: 6px;
-      margin-bottom: 6px;
-      padding: 6px 7px 4px 7px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      padding: 8px 12px;
+      border-radius: 10px;
     }
-    #event-popup .event-title {
-      font-size: 8px;
+    .mover-rank {
       font-weight: 600;
-      color: #fff;
-      margin-bottom: 3px;
+      color: #00E5FF;
+      margin-right: 8px;
     }
-    #event-popup .event-value {
+    .mover-title {
+      flex: 1;
+      font-size: 13px;
+      color: #ffffff;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-right: 8px;
+    }
+    .mover-change {
       display: flex;
       align-items: center;
-      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
     }
-    #event-popup .percent {
-      font-size: 9.5px;
-      font-weight: 700;
-      color: #00E5FF;
-      min-width: 24px;
-      text-align: right;
+    .mover-change.up {
+      color: #00FFA3;
     }
-    #event-popup .percent-bar-bg {
-      flex: 1;
-      height: 4.5px;
-      background: #222;
-      border-radius: 2px;
-      overflow: hidden;
+    .mover-change.down {
+      color: #FF4C4C;
     }
-    #event-popup .percent-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #00E5FF 60%, #00FFA3 100%);
-      border-radius: 2px;
+    .mover-change svg {
+      width: 12px;
+      height: 12px;
+      margin-right: 4px;
     }
   </style>
 </head>
@@ -191,7 +189,7 @@
     </div>
     <div class="chart-container-wrapper">
       <div id="chart-container"></div>
-      <div class="chart-legend" style="position: absolute; left: 12px; top: 12px; z-index: 1; font-size: 14px; font-family: sans-serif; line-height: 18px; font-weight: 300; color: #ffffff;"></div>
+      <div class="chart-legend"></div>
     </div>
     <div class="time-controls">
       <button data-range="1M">1M</button>
@@ -199,7 +197,10 @@
       <button data-range="1Y">1Y</button>
       <button data-range="ALL">ALL</button>
     </div>
-    <div id="event-popup"></div>
+    <div class="top-movers">
+      <div class="top-movers-title">Today's Top Movers</div>
+      <div class="top-movers-list" id="top-movers-list"></div>
+    </div>
   </div>
 
   <script>
@@ -208,41 +209,10 @@
     async function initChart() {
       chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
         layout: { background: { color: '#0A0A0A' }, textColor: '#ffffff' },
-        grid: {
-          vertLines: { color: 'rgba(255,255,255,0.03)' },
-          horzLines: { color: 'rgba(255,255,255,0.03)' },
-        },
-        timeScale: {
-          timeVisible: false,
-          secondsVisible: false,
-          borderColor: '#1a1a1a',
-          textColor: '#666666',
-          timeFormatter: time => {
-            const date = new Date(time * 1000);
-            return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' });
-          },
-        },
-        rightPriceScale: {
-          borderColor: '#1a1a1a',
-          textColor: '#666666',
-          minValue: 0,
-        },
-        crosshair: {
-          mode: LightweightCharts.CrosshairMode.Normal,
-          vertLine: {
-            color: '#00E5FF', width: 1, style: 3,
-            labelFormatter: timeValue => {
-              let ms;
-              if (typeof timeValue === 'object') {
-                ms = Date.UTC(timeValue.year, timeValue.month - 1, timeValue.day);
-              } else {
-                ms = timeValue * 1000;
-              }
-              return new Date(ms).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' });
-            },
-          },
-          horzLine: { color: '#00E5FF', width: 1, style: 3 },
-        },
+        grid: { vertLines: { color: 'rgba(255,255,255,0.03)' }, horzLines: { color: 'rgba(255,255,255,0.03)' } },
+        timeScale: { borderColor: '#1a1a1a', textColor: '#666666' },
+        rightPriceScale: { borderColor: '#1a1a1a', textColor: '#666666', minValue: 0 },
+        crosshair: { mode: LightweightCharts.CrosshairMode.Normal }
       });
 
       lineSeries = chart.addAreaSeries({
@@ -252,7 +222,7 @@
         lineWidth: 2,
         crosshairMarkerVisible: true,
         crosshairMarkerRadius: 4,
-        priceFormat: { type: 'price', precision: 2, minMove: 0.01 },
+        priceFormat: { type: 'price', precision: 2, minMove: 0.01 }
       });
 
       const response = await fetch('data/daily_scores.json');
@@ -260,28 +230,22 @@
 
       chartData = rawData.map(item => {
         const timeUnix = Math.floor(new Date(item.time + 'T00:00:00Z').getTime() / 1000);
-        return {
-          time: timeUnix,
-          value: Number(item.value),
-          ...(item.events ? { events: item.events } : {})
-        };
+        return { time: timeUnix, value: Number(item.value), ...(item.events ? { events: item.events } : {}) };
       });
 
       lineSeries.setData(chartData);
       lineSeries.setMarkers(chartData.filter(d => d.events).map(d => ({
-        time: d.time,
-        position: 'aboveBar',
-        color: '#fff',
-        shape: 'circle',
-        text: ''
+        time: d.time, position: 'aboveBar', color: '#fff', shape: 'circle', text: ''
       })));
 
       chart.timeScale().fitContent();
       setupTimeControls();
-      setupEventPopup();
       updateTimeRange('3M');
+      setupLegend();
+      loadTopMovers();
+    }
 
-      // --- LEGEND ---
+    function setupLegend() {
       const container = document.getElementById('chart-container');
       const legend = document.querySelector('.chart-legend');
       const symbolName = 'Avg. Daily % Change – Top 10 on Polymarket';
@@ -299,10 +263,7 @@
         legend.innerHTML = `${symbolName} <strong>${priceFormatted}</strong>`;
       });
       window.addEventListener('resize', () => {
-        chart.applyOptions({
-          width: container.clientWidth,
-          height: container.clientHeight,
-        });
+        chart.applyOptions({ width: container.clientWidth, height: container.clientHeight });
       });
     }
 
@@ -332,114 +293,36 @@
       });
     }
 
-    function setupEventPopup() {
-      const popup = document.getElementById('event-popup');
-      const container = document.getElementById('chart-container');
-
-      let lastPopupTime = null;
-      let markerHitboxes = [];
-
-      function showPopupAtPoint(point, time) {
-        const eventData = chartData.find(d => d.time === time && d.events);
-        if (eventData) {
-          popup.innerHTML =
-            eventData.events.map(e => `
-              <div class="event-card">
-                <div class="event-title">${e.title}</div>
-                <div class="event-value">
-                  <span class="percent">${e.value}%</span>
-                  <div class="percent-bar-bg">
-                    <div class="percent-bar-fill" style="width:${e.value}%;"></div>
-                  </div>
+    async function loadTopMovers() {
+      try {
+        const todayStr = new Date().toISOString().split('T')[0];
+        const top10Response = await fetch(`data/top10/${todayStr}.json`);
+        if (top10Response.ok) {
+          let top10Data = await top10Response.json();
+          top10Data = top10Data.filter(m => m.priceChange !== undefined)
+                               .sort((a, b) => Math.abs(b.priceChange) - Math.abs(a.priceChange));
+          const moversList = document.getElementById('top-movers-list');
+          top10Data.forEach((m, index) => {
+            const direction = m.priceChange >= 0 ? 'up' : 'down';
+            const arrowSvg = direction === 'up'
+              ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l6 8h-4v8h-4v-8h-4z"/></svg>'
+              : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-6-8h4v-8h4v8h4z"/></svg>';
+            moversList.innerHTML += `
+              <div class="mover-item">
+                <div class="mover-rank">#${index + 1}</div>
+                <div class="mover-title">${m.question}</div>
+                <div class="mover-change ${direction}">
+                  ${arrowSvg}<span>${m.priceChange.toFixed(2)}%</span>
                 </div>
               </div>
-            `).join('');
-
-          const containerRect = container.getBoundingClientRect();
-          const popupWidth = window.innerWidth < 600 ? 130 : 200;
-          const margin = 10;
-          let leftPos;
-
-          if (point.x + popupWidth + margin > containerRect.width) {
-            leftPos = point.x - popupWidth - margin;
-          } else {
-            leftPos = point.x + margin;
-          }
-
-          popup.style.left = `${leftPos}px`;
-          popup.style.top = `${point.y}px`;
-          popup.style.display = 'block';
-          lastPopupTime = time;
-        } else {
-          popup.style.display = 'none';
-          lastPopupTime = null;
-        }
-      }
-
-      chart.subscribeCrosshairMove(param => {
-        if ('ontouchstart' in window) return; // skip hover on touch devices
-        if (!param.time || !param.point) {
-          popup.style.display = 'none';
-          return;
-        }
-        const paramTime = (typeof param.time === 'object')
-          ? Math.floor(Date.UTC(param.time.year, param.time.month - 1, param.time.day) / 1000)
-          : Math.floor(param.time);
-        showPopupAtPoint(param.point, paramTime);
-      });
-
-      // Mobile/touch support: tap to show/hide popup
-      if ('ontouchstart' in window) {
-        // Calculate marker hitboxes for easier tap
-        function updateMarkerHitboxes() {
-          const timeScale = chart.timeScale();
-          markerHitboxes = chartData.filter(d => d.events).map(d => {
-            const px = timeScale.timeToCoordinate(d.time);
-            return { time: d.time, x: px };
+            `;
           });
+        } else {
+          console.warn('No top10 data found for today.');
         }
-        chart.timeScale().subscribeVisibleLogicalRangeChange(updateMarkerHitboxes);
-        updateMarkerHitboxes();
-
-        container.addEventListener('touchstart', function(e) {
-          if (!chartData.length) return;
-          const rect = container.getBoundingClientRect();
-          const x = e.touches[0].clientX - rect.left;
-          const y = e.touches[0].clientY - rect.top;
-          // Find nearest marker (circle) by x, within a tap radius
-          let nearest = null;
-          let minDist = 9999;
-          for (const m of markerHitboxes) {
-            if (m.x == null) continue;
-            const dist = Math.abs(m.x - x);
-            if (dist < minDist && dist < 24) { // 24px tap radius
-              minDist = dist;
-              nearest = m;
-            }
-          }
-          if (nearest) {
-            // Show popup at marker
-            showPopupAtPoint({x: markerHitboxes.find(m=>m.time===nearest.time).x, y: y}, nearest.time);
-          } else {
-            popup.style.display = 'none';
-            lastPopupTime = null;
-          }
-        });
-        // Hide popup on tap outside
-        document.body.addEventListener('touchstart', function(e) {
-          if (!container.contains(e.target) && !popup.contains(e.target)) {
-            popup.style.display = 'none';
-            lastPopupTime = null;
-          }
-        }, {passive: true});
+      } catch (err) {
+        console.error('Error loading top10 data:', err);
       }
-      // Also close popup on desktop click away
-      document.body.addEventListener('mousedown', function(e) {
-        if (!container.contains(e.target) && !popup.contains(e.target)) {
-          popup.style.display = 'none';
-          lastPopupTime = null;
-        }
-      });
     }
 
     document.addEventListener('DOMContentLoaded', initChart);
