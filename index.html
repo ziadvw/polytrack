@@ -4,608 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Polytrack</title>
+
+  <!-- Inter font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet" />
+
+  <!-- Lightweight Charts library -->
   <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-      background-color: #000000;
-      color: #ffffff;
-    }
-    .chart-wrapper {
-      background-color: #0A0A0A;
-      border-radius: 24px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      padding: 24px;
-      border: 1px solid #1a1a1a;
-    }
-    .header {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      margin-bottom: 24px;
-      padding: 0 10px;
-    }
-    .title {
-      font-size: 48px;
-      font-weight: 800;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      color: #ffffff;
-      letter-spacing: -0.5px;
-    }
-    .chart-container-wrapper {
-      position: relative;
-      margin-bottom: 20px;
-    }
-    #chart-container {
-      height: 400px;
-      width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
-    }
-    .chart-legend {
-      position: absolute;
-      left: 12px;
-      top: 12px;
-      z-index: 1;
-      font-size: 16px;
-      font-family: sans-serif;
-      line-height: 20px;
-      font-weight: 300;
-      color: #ffffff;
-      background: rgba(10,10,10,0.85);
-      padding: 5px 16px;
-      border-radius: 10px;
-      max-width: 420px;
-      box-sizing: border-box;
-      pointer-events: none;
-      white-space: nowrap;
-    }
-    @media (max-width: 600px) {
-      .chart-wrapper {
-        padding: 8px;
-        border-radius: 12px;
-      }
-      .header {
-        margin-bottom: 12px;
-        padding: 0 2px;
-      }
-      .title {
-        font-size: 16px;
-        letter-spacing: -0.1px;
-      }
-      .chart-container-wrapper {
-        margin-bottom: 10px;
-      }
-      #chart-container {
-        height: 270px;
-      }
-      .time-controls button {
-        padding: 6px 10px;
-        font-size: 11px;
-      }
-      .chart-legend {
-        font-size: 9px !important;
-        line-height: 12px !important;
-        left: 4px !important;
-        top: 4px !important;
-        padding: 2px 5px !important;
-        border-radius: 5px !important;
-        max-width: 90vw !important;
-      }
-    }
-    .time-controls {
-      display: flex;
-      gap: 2px;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 4px;
-      border-radius: 12px;
-      width: fit-content;
-    }
-    .time-controls button {
-      padding: 8px 16px;
-      border: none;
-      background: transparent;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 500;
-      color: #666666;
-      transition: all 0.2s ease;
-    }
-    .time-controls button:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.1);
-    }
-    .time-controls button.active {
-      background: rgba(255, 255, 255, 0.1);
-      color: #00E5FF;
-    }
-    .top-movers {
-      margin-top: 30px;
-      background: #0A0A0A;
-      border: 1px solid #1a1a1a;
-      border-radius: 16px;
-      padding: 16px;
-    }
-    .top-movers-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #ffffff;
-    }
-    .top-movers-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .mover-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #181c22;
-      padding: 8px 12px;
-      border-radius: 10px;
-    }
-    .mover-rank {
-      font-weight: 600;
-      color: #00E5FF;
-      margin-right: 8px;
-    }
-    .mover-title {
-      flex: 1;
-      font-size: 13px;
-      color: #ffffff;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      margin-right: 8px;
-    }
-    .mover-change {
-      display: flex;
-      align-items: center;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    .mover-change.up {
-      color: #00FFA3;
-    }
-    .mover-change.down {
-      color: #FF4C4C;
-    }
-    .mover-change.neutral {
-      color: #cccccc;
-    }
-    .mover-change svg {
-      width: 12px;
-      height: 12px;
-      margin-right: 4px;
-    }
-    .github-link {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      color: #fff;
-      text-decoration: none;
-      padding-left: 18px;
-      transition: color 0.2s;
-    }
-    .github-link:hover {
-      color: #00E5FF;
-    }
-    .github-link svg {
-      height: 24px;
-      width: 24px;
-    }
-    @media (max-width: 600px) {
-      .github-link svg {
-        height: 16px;
-        width: 16px;
-      }
-      .github-link {
-        padding-left: 6px;
-      }
-    }
-    /* Event popup styles */
-    #event-popup {
-      display: none;
-      position: absolute;
-      background: #1a1a1a;
-      color: #fff;
-      padding: 7px;
-      border-radius: 7px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      max-width: 220px;
-      z-index: 10;
-      font-size: 11px;
-      line-height: 1.1;
-      pointer-events: none;
-      border: 1px solid #1a1a1a;
-    }
-    #event-popup .event-card {
-      background: #181c22;
-      border-radius: 6px;
-      margin-bottom: 6px;
-      padding: 6px 7px 4px 7px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    }
-    #event-popup .event-title {
-      font-size: 8px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 3px;
-    }
-    #event-popup .event-value {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    #event-popup .event-value .percent-container {
-      display: flex;
-      align-items: center;
-      min-width: 54px;
-      max-width: 54px;
-      justify-content: flex-start;
-      padding-left: 2px;
-    }
-    #event-popup .event-value .arrow {
-      width: 12px;
-      height: 12px;
-      display: inline-block;
-      margin-right: 2px;
-    }
-    #event-popup .percent.up {
-      color: #00FFA3;
-    }
-    #event-popup .percent.down {
-      color: #FF4C4C;
-    }
-    #event-popup .percent.neutral {
-      color: #cccccc;
-    }
-    #event-popup .percent {
-      font-size: 9.5px;
-      font-weight: 700;
-      color: #00E5FF;
-      min-width: 24px;
-      text-align: right;
-    }
-    #event-popup .percent-bar-bg {
-      flex: 1;
-      height: 4.5px;
-      background: #222;
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    #event-popup .percent-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #00E5FF 60%, #00FFA3 100%);
-      border-radius: 2px;
-    }
-    .feedback-btn {
-      display: inline-block;
-      background: none;
-      color: #888;
-      border: none;
-      border-radius: 0;
-      padding: 0;
-      font-size: 15px;
-      font-weight: 400;
-      font-family: inherit;
-      cursor: pointer;
-      box-shadow: none;
-      transition: color 0.2s;
-    }
-    .feedback-btn:hover {
-      color: #00E5FF;
-      text-decoration: underline;
-    }
-    .feedback-btn-row {
-      display: flex;
-      justify-content: flex-end;
-      padding-right: 8px;
-      margin-top: 24px;
-      margin-bottom: 4px;
-    }
-  </style>
+
+  <!-- Your stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="chart-wrapper">
     <div class="header">
       <div class="title">How Crazy is the World Today?</div>
       <a href="https://github.com/ziadvw/polytrack" class="github-link" target="_blank" rel="noopener" aria-label="GitHub Repository">
-        <svg height="32" width="32" viewBox="0 0 16 16" fill="currentColor" style="display:block;" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        <svg height="32" width="32" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+          0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+          -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87
+          2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
+          0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.12 0 0
+          .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2
+          .27 1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.92.08 2.12
+          .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95
+          .29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19
+          0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
         </svg>
       </a>
     </div>
+
     <div class="chart-container-wrapper">
       <div id="chart-container"></div>
       <div class="chart-legend"></div>
     </div>
+
     <div class="time-controls">
       <button data-range="1M">1M</button>
       <button data-range="3M">3M</button>
       <button data-range="1Y">1Y</button>
       <button data-range="ALL">ALL</button>
     </div>
+
     <div id="event-popup"></div>
+
     <div class="top-movers">
       <div class="top-movers-title">Today's Top Movers</div>
       <div class="top-movers-list" id="top-movers-list"></div>
     </div>
+
     <div class="feedback-btn-row">
-      <button class="feedback-btn" onclick="window.open('mailto:zeyadd42@gmail.com?subject=Polytrack%20Feedback','_blank')">Send feedback</button>
+      <button class="feedback-btn" onclick="window.open('mailto:zeyadd42@gmail.com?subject=Polytrack%20Feedback','_blank')">
+        Send feedback
+      </button>
     </div>
   </div>
 
-  <script>
-    let chart, lineSeries, chartData = [];
-
-    async function initChart() {
-      chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
-        layout: { background: { color: '#0A0A0A' }, textColor: '#ffffff' },
-        grid: { vertLines: { color: 'rgba(255,255,255,0.03)' }, horzLines: { color: 'rgba(255,255,255,0.03)' } },
-        timeScale: { borderColor: '#1a1a1a', textColor: '#666666' },
-        rightPriceScale: { borderColor: '#1a1a1a', textColor: '#666666', minValue: 0 },
-        crosshair: { mode: LightweightCharts.CrosshairMode.Normal }
-      });
-
-      lineSeries = chart.addAreaSeries({
-        lineColor: '#00E5FF',
-        topColor: 'rgba(0,229,255,0.4)',
-        bottomColor: 'rgba(0,229,255,0.0)',
-        lineWidth: 2,
-        crosshairMarkerVisible: true,
-        crosshairMarkerRadius: 4,
-        priceFormat: { type: 'price', precision: 2, minMove: 0.01 }
-      });
-
-      const response = await fetch('data/daily_scores.json');
-      const rawData = await response.json();
-
-      chartData = rawData.map(item => {
-        const timeUnix = Math.floor(new Date(item.time + 'T00:00:00Z').getTime() / 1000);
-        return { time: timeUnix, value: Number(item.value), ...(item.events ? { events: item.events } : {}) };
-      });
-
-      lineSeries.setData(chartData);
-      lineSeries.setMarkers(chartData.filter(d => d.events).map(d => ({
-        time: d.time, position: 'aboveBar', color: '#fff', shape: 'circle', text: ''
-      })));
-
-      chart.timeScale().fitContent();
-      setupTimeControls();
-      setupEventPopup();
-      updateTimeRange('3M');
-      setupLegend();
-      loadTopMovers();
-    }
-
-    function setupLegend() {
-      const container = document.getElementById('chart-container');
-      const legend = document.querySelector('.chart-legend');
-      const symbolName = 'Avg. Daily % Change – Top 10 on Polymarket';
-      let latestValue = chartData.length ? chartData[chartData.length - 1].value.toFixed(2) + '%' : '';
-      legend.innerHTML = `${symbolName} <strong>${latestValue}</strong>`;
-      chart.subscribeCrosshairMove(param => {
-        let priceFormatted = latestValue;
-        if (param.time) {
-          const data = param.seriesData.get(lineSeries);
-          if (data && (data.value !== undefined || data.close !== undefined)) {
-            const price = data.value !== undefined ? data.value : data.close;
-            priceFormatted = price.toFixed(2) + '%';
-          }
-        }
-        legend.innerHTML = `${symbolName} <strong>${priceFormatted}</strong>`;
-      });
-      window.addEventListener('resize', () => {
-        chart.applyOptions({ width: container.clientWidth, height: container.clientHeight });
-      });
-    }
-
-    function setupTimeControls() {
-      const buttons = document.querySelectorAll('.time-controls button');
-      buttons.forEach(button => {
-        button.addEventListener('click', () => {
-          buttons.forEach(b => b.classList.remove('active'));
-          button.classList.add('active');
-          updateTimeRange(button.dataset.range);
-        });
-      });
-      document.querySelector('button[data-range="3M"]').classList.add('active');
-    }
-
-    function updateTimeRange(range) {
-      if (!chartData.length) return;
-      const last = new Date(chartData[chartData.length - 1].time * 1000);
-      let start = new Date(last);
-      if (range === '1M') start.setMonth(last.getMonth() - 1);
-      else if (range === '3M') start.setMonth(last.getMonth() - 3);
-      else if (range === '1Y') start.setFullYear(last.getFullYear() - 1);
-      else if (range === 'ALL') { chart.timeScale().fitContent(); return; }
-      chart.timeScale().setVisibleRange({
-        from: Math.floor(start.getTime() / 1000),
-        to: Math.floor(last.getTime() / 1000),
-      });
-    }
-
-    async function loadTopMovers() {
-      try {
-        const todayStr = new Date().toISOString().split('T')[0];
-        const top10Response = await fetch(`data/top10/${todayStr}.json`);
-        if (top10Response.ok) {
-          let top10Data = await top10Response.json();
-          // Save original order for index lookup
-          const originalOrder = top10Data.filter(m => m.priceChange !== undefined);
-          // Sort for display
-          const sortedMovers = [...originalOrder].sort((a, b) => Math.abs(b.priceChange) - Math.abs(a.priceChange));
-          const moversList = document.getElementById('top-movers-list');
-          moversList.innerHTML = '';
-          sortedMovers.forEach((m) => {
-            // Find original index (add 1 for display)
-            const origIndex = originalOrder.findIndex(x => x.question === m.question) + 1;
-            // Only strictly positive is 'up', strictly negative is 'down', zero is 'neutral'
-            let direction, arrowSvg = '';
-            if (m.priceChange > 0) {
-              direction = 'up';
-              arrowSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l6 8h-4v8h-4v-8h-4z"/></svg>';
-            } else if (m.priceChange < 0) {
-              direction = 'down';
-              arrowSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-6-8h4v-8h4v8h4z"/></svg>';
-            } else {
-              direction = 'neutral';
-              arrowSvg = '';
-            }
-            moversList.innerHTML += `
-              <div class="mover-item">
-                <div class="mover-rank">#${origIndex}</div>
-                <div class="mover-title">${m.question}</div>
-                <div class="mover-change ${direction}">
-                  ${arrowSvg}<span>${m.priceChange.toFixed(2)}%</span>
-                </div>
-              </div>
-            `;
-          });
-        } else {
-          console.warn('No top10 data found for today.');
-        }
-      } catch (err) {
-        console.error('Error loading top10 data:', err);
-      }
-    }
-
-    function setupEventPopup() {
-      const popup = document.getElementById('event-popup');
-      const container = document.getElementById('chart-container');
-
-      let lastPopupTime = null;
-      let markerHitboxes = [];
-
-      function showPopupAtPoint(point, time) {
-        const eventData = chartData.find(d => d.time === time && d.events);
-        if (eventData) {
-          popup.innerHTML =
-            eventData.events.map(e => {
-              let direction, arrowSvg, percentClass;
-              if (e.value > 0) {
-                direction = 'up';
-                arrowSvg = '<span class="arrow" style="color:#00FFA3;">'+
-                  '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l6 8h-4v8h-4v-8h-4z"/></svg></span>';
-                percentClass = 'up';
-              } else if (e.value < 0) {
-                direction = 'down';
-                arrowSvg = '<span class="arrow" style="color:#FF4C4C;">'+
-                  '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-6-8h4v-8h4v8h4z"/></svg></span>';
-                percentClass = 'down';
-              } else {
-                direction = 'neutral';
-                arrowSvg = '<span class="arrow" style="color:#cccccc;">–</span>';
-                percentClass = 'neutral';
-              }
-              return `
-                <div class="event-card">
-                  <div class="event-title">${e.title}</div>
-                  <div class="event-value">
-                    <span class="percent-container">${arrowSvg}<span class="percent ${percentClass}">${e.value > 0 ? '+' : ''}${e.value}%</span></span>
-                    <div class="percent-bar-bg">
-                      <div class="percent-bar-fill" style="width:${Math.abs(e.value)}%;"></div>
-                    </div>
-                  </div>
-                </div>
-              `;
-            }).join('');
-
-          const containerRect = container.getBoundingClientRect();
-          const popupWidth = window.innerWidth < 600 ? 130 : 200;
-          const margin = 10;
-          let leftPos;
-
-          if (point.x + popupWidth + margin > containerRect.width) {
-            leftPos = point.x - popupWidth - margin;
-          } else {
-            leftPos = point.x + margin;
-          }
-
-          popup.style.left = `${leftPos}px`;
-          popup.style.top = `${point.y}px`;
-          popup.style.display = 'block';
-          lastPopupTime = time;
-        } else {
-          popup.style.display = 'none';
-          lastPopupTime = null;
-        }
-      }
-
-      chart.subscribeCrosshairMove(param => {
-        if ('ontouchstart' in window) return; // skip hover on touch devices
-        if (!param.time || !param.point) {
-          popup.style.display = 'none';
-          return;
-        }
-        const paramTime = (typeof param.time === 'object')
-          ? Math.floor(Date.UTC(param.time.year, param.time.month - 1, param.time.day) / 1000)
-          : Math.floor(param.time);
-        showPopupAtPoint(param.point, paramTime);
-      });
-
-      // Mobile/touch support: tap to show/hide popup
-      if ('ontouchstart' in window) {
-        // Calculate marker hitboxes for easier tap
-        function updateMarkerHitboxes() {
-          const timeScale = chart.timeScale();
-          markerHitboxes = chartData.filter(d => d.events).map(d => {
-            const px = timeScale.timeToCoordinate(d.time);
-            return { time: d.time, x: px };
-          });
-        }
-        chart.timeScale().subscribeVisibleLogicalRangeChange(updateMarkerHitboxes);
-        updateMarkerHitboxes();
-
-        container.addEventListener('touchstart', function(e) {
-          if (!chartData.length) return;
-          const rect = container.getBoundingClientRect();
-          const x = e.touches[0].clientX - rect.left;
-          const y = e.touches[0].clientY - rect.top;
-          // Find nearest marker (circle) by x, within a tap radius
-          let nearest = null;
-          let minDist = 9999;
-          for (const m of markerHitboxes) {
-            if (m.x == null) continue;
-            const dist = Math.abs(m.x - x);
-            if (dist < minDist && dist < 24) { // 24px tap radius
-              minDist = dist;
-              nearest = m;
-            }
-          }
-          if (nearest) {
-            // Show popup at marker
-            showPopupAtPoint({x: markerHitboxes.find(m=>m.time===nearest.time).x, y: y}, nearest.time);
-          } else {
-            popup.style.display = 'none';
-            lastPopupTime = null;
-          }
-        });
-        // Hide popup on tap outside
-        document.body.addEventListener('touchstart', function(e) {
-          if (!container.contains(e.target) && !popup.contains(e.target)) {
-            popup.style.display = 'none';
-            lastPopupTime = null;
-          }
-        }, {passive: true});
-      }
-      // Also close popup on desktop click away
-      document.body.addEventListener('mousedown', function(e) {
-        if (!container.contains(e.target) && !popup.contains(e.target)) {
-          popup.style.display = 'none';
-          lastPopupTime = null;
-        }
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', initChart);
-  </script>
+  <!-- Your main JS -->
+  <script src="main.js" defer></script>
 </body>
 </html>
