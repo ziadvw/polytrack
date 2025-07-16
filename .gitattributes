@@ -1,0 +1,2 @@
+data/daily_scores.json merge=theirs
+data/top10/* merge=theirs
