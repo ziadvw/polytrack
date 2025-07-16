@@ -19,6 +19,3 @@ __pycache__/
 .vscode/
 .idea/
 
-# Generated data files (updated by workflow)
-data/daily_scores.json
-data/top10/
