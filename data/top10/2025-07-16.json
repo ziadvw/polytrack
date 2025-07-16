@@ -3,60 +3,70 @@
     "conditionId": "0xebddfcf7b4401dade8b4031770a1ab942b01854f3bed453d5df9425cd9f211a9",
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
-    "openInterest": "4361112177020"
+    "openInterest": "4361112177020",
+    "priceChange": 0.7
   },
   {
     "conditionId": "0x8ee2f1640386310eb5e7ffa596ba9335f2d324e303d21b0dfea6998874445791",
     "tokenId": "15974786252393396629980467963784550802583781222733347534844974829144359265969",
     "question": "Russia x Ukraine ceasefire in 2025?",
-    "openInterest": "2325794158783"
+    "openInterest": "2325794158783",
+    "priceChange": 1.0
   },
   {
     "conditionId": "0x4a68d828f7263f34391484404380c34efa9566f12a08a88553ddbe8e285c3ae9",
     "tokenId": "73793697275923646355831824753345919471011673129768736520616870696302293395247",
     "question": "No change in Fed interest rates after July 2025 meeting?",
-    "openInterest": "1996646897761"
+    "openInterest": "1996646897761",
+    "priceChange": 0.35
   },
   {
     "conditionId": "0xebfd12ede5c2ef43189c4f37701ca7137e84a7b0cc25741d5ce223bbdc49f47f",
     "tokenId": "32472689363633232251888735842780829434506566435025707987014623316114512196519",
     "question": "Will Bitcoin reach $150K in July?",
-    "openInterest": "1923976081861"
+    "openInterest": "1923976081861",
+    "priceChange": 0.45
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
     "tokenId": "75505728818237076147318796536066812362152358606307154083407489467059230821371",
     "question": "Khamenei out as Supreme Leader of Iran in 2025?",
-    "openInterest": "1700132181021"
+    "openInterest": "1700132181021",
+    "priceChange": 1.5
   },
   {
     "conditionId": "0xab6faa3e66abacc484bbb4bd31ae5e2a56d6f6252b5023631f1bd9e5299fa2f8",
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
-    "openInterest": "1629103938665"
+    "openInterest": "1629103938665",
+    "priceChange": 1.0
   },
   {
     "conditionId": "0xcb1531b00e984865530f13e4ce35bcbc7d71615af98827b5e9aee2ca2984b626",
     "tokenId": "31744904918540551255746477870591988696765533508454358136402838182759217759615",
     "question": "Will China invade Taiwan in 2025?",
-    "openInterest": "1460407127146"
+    "openInterest": "1460407127146",
+    "priceChange": 0.0
   },
   {
     "conditionId": "0x62e939fbcb26aee4f172520444ef43a83adf3ea6155e2ae5d0871c13accdf21b",
     "tokenId": "13482242778366768315395030326922727504294085396864365135248842419774074207478",
     "question": "Will Ethereum reach $4000 in July?",
-    "openInterest": "1168617381515"
+    "openInterest": "1168617381515",
+    "priceChange": 8.1
   },
   {
     "conditionId": "0xf2ce8d3897ac5009a131637d3575f1f91c579bd08eecce6ae2b2da0f32bbe6f1",
     "tokenId": "114304586861386186441621124384163963092522056897081085884483958561365015034812",
     "question": "Xi Jinping out in 2025?",
-    "openInterest": "1153011505417"
+    "openInterest": "1153011505417",
+    "priceChange": 1.0
   },
   {
     "conditionId": "0x01d5f475cb30704216ae9906d369c0b2991cafec882ab4888a66ff11eb03e569",
     "tokenId": "44446628319261786751896876365833910598445252343588252409740203088317210950410",
     "question": "Will Trump remove Jerome Powell in 2025?",
-    "openInterest": "1152448279707"
+    "openInterest": "1152448279707",
+    "priceChange": 4.5
   }
 ]
