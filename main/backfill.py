@@ -38,7 +38,7 @@ def process_single_day(date_et: datetime, all_markets: List[Dict[str, Any]]
         return day_str, 0.0
 
     changes = [
-        get_day_price_change(id_map[cid["id"]], ts_start, ts_end)
+        abs(get_day_price_change(id_map[cid["id"]], ts_start, ts_end))
         for cid in top
         if cid["id"] in id_map
     ]

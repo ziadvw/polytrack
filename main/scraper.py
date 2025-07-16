@@ -175,7 +175,11 @@ def get_ois(
             r = requests.post(API_OI_GQL, json={"query": query, "variables": variables}, timeout=20)
             r.raise_for_status()
             data = r.json()
-            return [{"id": m["id"], "amount": m["amount"]} for m in data["data"]["marketOpenInterests"]]
+            # Divide 'amount' by 1_000_000 for each market
+            return [
+                {"id": m["id"], "amount": float(m["amount"]) / 1_000_000}
+                for m in data["data"]["marketOpenInterests"]
+            ]
         except Exception as exc:
             print("❌ GraphQL error:", exc)
             return []
@@ -242,7 +246,7 @@ def get_day_price_change(
                 return 0.0
             start_price = hist[0]["p"]
             end_price   = hist[-2]["p"]          # second-to-last
-            return abs(end_price - start_price) * 100
+            return end_price - start_price * 100
         except Exception as exc:
             if attempt < 2:
                 time.sleep(1)
