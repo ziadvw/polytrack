@@ -58,6 +58,7 @@ def main() -> None:
             updated_top10.append(m)
             continue
         change = get_day_price_change(token, today_ts, now_ts, fidelity=60)
+        print(f"    today_ts={today_ts}, now_ts={now_ts}")
         print(f"  • #{i} {token}: {change:.2f}%")
         m["priceChange"] = round(change, 3)  # signed value
         updated_top10.append(m)
