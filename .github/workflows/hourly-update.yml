@@ -28,7 +28,7 @@ jobs:
         env:
           PYTHONPATH: main                    # so `import scraper` works
           ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
-        run: python main/scripts/hourly-update.py
+        run: python scripts/hourly-update.py
 
       - name: Commit updated data
         run: |
