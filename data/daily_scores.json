@@ -2471,6 +2471,28 @@
   },
   {
     "time": "2025-07-16",
-    "value": 1.86
+    "value": 27.375,
+    "events": [
+      {
+        "title": "No change in Fed interest rates after July 2025 meeting?",
+        "value": -94.996
+      },
+      {
+        "title": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
+        "value": -70.742
+      },
+      {
+        "title": "Khamenei out as Supreme Leader of Iran in 2025?",
+        "value": -25.725
+      },
+      {
+        "title": "Will Trump remove Jerome Powell in 2025?",
+        "value": -25.315
+      },
+      {
+        "title": "Russia x Ukraine ceasefire in 2025?",
+        "value": -23.275
+      }
+    ]
   }
 ]
