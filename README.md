@@ -25,3 +25,7 @@ I think this makes more sense now, though I’m open to suggestions. There are p
 - To backfill active markets for a specific period, use the appropriate flags in the backfill scripts (see `main/backfill.py`).
 - You can also backfill scores and experiment with the change formula directly in `backfill.py`.
 - All data syncing and updates are automated and run regularly via GitHub Actions.
+
+# Todo
+- Overlay OI graph on the chart
+- Deduplicate markets that share same event by highest price change instead of highest OI
