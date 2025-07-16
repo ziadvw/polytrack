@@ -246,7 +246,7 @@ def get_day_price_change(
                 return 0.0
             start_price = hist[0]["p"]
             end_price   = hist[-2]["p"]          # second-to-last
-            return end_price - start_price * 100
+            return (end_price - start_price) * 100
         except Exception as exc:
             if attempt < 2:
                 time.sleep(1)
