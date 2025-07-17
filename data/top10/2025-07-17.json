@@ -5,7 +5,7 @@
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "slug": "will-zohran-mamdani-win-the-2025-nyc-mayoral-election",
     "openInterest": 4376679.803374,
-    "priceChange": -0.65
+    "priceChange": -0.6
   },
   {
     "conditionId": "0x8ee2f1640386310eb5e7ffa596ba9335f2d324e303d21b0dfea6998874445791",
@@ -21,7 +21,7 @@
     "question": "No change in Fed interest rates after July 2025 meeting?",
     "slug": "no-change-in-fed-interest-rates-after-july-2025-meeting",
     "openInterest": 2179361.355999,
-    "priceChange": 0.4
+    "priceChange": 0.45
   },
   {
     "conditionId": "0xebfd12ede5c2ef43189c4f37701ca7137e84a7b0cc25741d5ce223bbdc49f47f",
@@ -29,7 +29,7 @@
     "question": "Will Bitcoin reach $150K in July?",
     "slug": "will-bitcoin-reach-150k-in-july",
     "openInterest": 1980007.99597,
-    "priceChange": 0.1
+    "priceChange": 0.15
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
@@ -53,7 +53,7 @@
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "slug": "will-donald-trump-win-nobel-peace-prize-in-2025",
     "openInterest": 1631898.555349,
-    "priceChange": -0.3
+    "priceChange": 0.0
   },
   {
     "conditionId": "0xcb1531b00e984865530f13e4ce35bcbc7d71615af98827b5e9aee2ca2984b626",
@@ -69,7 +69,7 @@
     "question": "Israel x Hamas ceasefire before August?",
     "slug": "israel-x-hamas-ceasefire-before-august",
     "openInterest": 1261812.812664,
-    "priceChange": -5.0
+    "priceChange": -3.0
   },
   {
     "conditionId": "0x62e939fbcb26aee4f172520444ef43a83adf3ea6155e2ae5d0871c13accdf21b",
@@ -77,6 +77,6 @@
     "question": "Will Ethereum reach $4000 in July?",
     "slug": "will-ethereum-reach-4000-in-july",
     "openInterest": 1180934.56822,
-    "priceChange": 3.7
+    "priceChange": 3.95
   }
 ]
