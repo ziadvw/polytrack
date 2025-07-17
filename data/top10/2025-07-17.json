@@ -11,21 +11,21 @@
     "tokenId": "15974786252393396629980467963784550802583781222733347534844974829144359265969",
     "question": "Russia x Ukraine ceasefire in 2025?",
     "openInterest": 2331144.144179,
-    "priceChange": -0.5
+    "priceChange": -1.0
   },
   {
     "conditionId": "0x4a68d828f7263f34391484404380c34efa9566f12a08a88553ddbe8e285c3ae9",
     "tokenId": "73793697275923646355831824753345919471011673129768736520616870696302293395247",
     "question": "No change in Fed interest rates after July 2025 meeting?",
     "openInterest": 2179361.355999,
-    "priceChange": 0.0
+    "priceChange": -0.05
   },
   {
     "conditionId": "0xebfd12ede5c2ef43189c4f37701ca7137e84a7b0cc25741d5ce223bbdc49f47f",
     "tokenId": "32472689363633232251888735842780829434506566435025707987014623316114512196519",
     "question": "Will Bitcoin reach $150K in July?",
     "openInterest": 1980007.99597,
-    "priceChange": -0.25
+    "priceChange": -0.4
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
@@ -46,7 +46,7 @@
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 1631898.555349,
-    "priceChange": 0.25
+    "priceChange": 0.05
   },
   {
     "conditionId": "0xcb1531b00e984865530f13e4ce35bcbc7d71615af98827b5e9aee2ca2984b626",
@@ -60,13 +60,13 @@
     "tokenId": "31268176944017248400034672618368276182667666720465434550595395503469605004388",
     "question": "Israel x Hamas ceasefire before August?",
     "openInterest": 1261812.812664,
-    "priceChange": 2.5
+    "priceChange": 1.0
   },
   {
     "conditionId": "0x62e939fbcb26aee4f172520444ef43a83adf3ea6155e2ae5d0871c13accdf21b",
     "tokenId": "13482242778366768315395030326922727504294085396864365135248842419774074207478",
     "question": "Will Ethereum reach $4000 in July?",
     "openInterest": 1180934.56822,
-    "priceChange": 6.85
+    "priceChange": 10.35
   }
 ]
