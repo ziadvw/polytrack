@@ -74,8 +74,11 @@ body {
       padding: 0 2px;
     }
     .title {
-      font-size: 24px;
+      font-size: 28px;
       letter-spacing: -0.2px;
+    }
+    .top-movers-title {
+      font-size: 20px;
     }
     .chart-container-wrapper {
       margin-bottom: 10px;
@@ -203,12 +206,12 @@ body {
   }
   
   .github-link {
-    margin-left: auto;
     display: flex;
     align-items: center;
     color: #fff;
     text-decoration: none;
-    padding-left: 18px;
+    padding-left: 0;
+    margin-left: 10px;
     transition: color 0.2s;
   }
   
@@ -356,6 +359,8 @@ body {
   .feedback-btn-row {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
     padding-right: 8px;
     margin-top: 24px;
     margin-bottom: 4px;
@@ -363,21 +368,21 @@ body {
   
   @media (max-width: 600px) {
     #event-popup {
-      font-size: 13px;
-      padding: 9px;
+      font-size: 11px;
+      padding: 5px;
       max-width: 98vw;
       border-radius: 9px;
     }
     #event-popup .event-card {
-      padding: 9px 9px 7px 9px;
+      padding: 7px 7px 5px 7px;
       border-radius: 9px;
     }
     #event-popup .event-title {
-      font-size: 12px;
-      margin-bottom: 5px;
+      font-size: 11px;
+      margin-bottom: 4px;
     }
     #event-popup .percent {
-      font-size: 13px;
+      font-size: 12px;
       width: auto;
       min-width: 0;
       max-width: none;
