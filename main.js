@@ -120,38 +120,6 @@ async function loadTopMovers() {
         moversList.innerHTML += `
           <div class=\"mover-item\">\n            <div class=\"mover-rank\">#${origIndex}</div>\n            <div class=\"mover-title\">${questionHtml}</div>\n            <div class=\"mover-change ${direction}\">\n              ${arrowSvg}<span>${m.priceChange.toFixed(2)}%</span>\n            </div>\n          </div>\n        `;
       });
-      // Middle ellipsis for mover-link on mobile
-      if (window.innerWidth <= 600) {
-        document.querySelectorAll('.mover-link').forEach(link => {
-          const parent = link.parentElement;
-          if (!parent) return;
-          const containerWidth = parent.offsetWidth;
-          // Temporarily reset text to measure full width
-          link.style.whiteSpace = 'nowrap';
-          link.style.overflow = 'visible';
-          link.style.textOverflow = 'clip';
-          const fullText = link.textContent.replace('↗', '').trim();
-          const arrow = ' ↗';
-          // If fits, do nothing
-          if (link.scrollWidth <= containerWidth) {
-            link.textContent = fullText + arrow;
-            return;
-          }
-          // Otherwise, truncate middle
-          let left = 0, right = fullText.length;
-          let truncated = fullText;
-          while (left < right) {
-            const mid = Math.floor((right - left) / 2) + left;
-            const start = fullText.slice(0, Math.ceil((fullText.length - mid) / 2));
-            const end = fullText.slice(fullText.length - Math.floor((fullText.length - mid) / 2));
-            link.textContent = start + '…' + end + arrow;
-            if (link.scrollWidth <= containerWidth || mid === 0) {
-              break;
-            }
-            left = mid;
-          }
-        });
-      }
     } else {
       console.warn('No top10 data found for today.');
     }

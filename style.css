@@ -122,6 +122,7 @@ body {
       align-items: center;
       min-width: 0;
       overflow: hidden;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
     .top-movers-list .mover-link {
@@ -129,14 +130,12 @@ body {
       align-items: center;
       min-width: 0;
       overflow: hidden;
+      text-overflow: ellipsis;
       white-space: nowrap;
       flex-shrink: 1;
       color: #fff !important;
       text-decoration: none !important;
       font-weight: 600;
-    }
-    .top-movers-list .mover-link > * {
-      direction: ltr;
     }
     .top-movers-list .mover-link:hover {
       color: #00E5FF !important;
