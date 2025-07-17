@@ -113,8 +113,9 @@ async function loadTopMovers() {
           direction = 'neutral';
           arrowSvg = '';
         }
+        const linkArrow = '&nbsp;↗';
         const questionHtml = m.slug
-          ? `<a href=\"https://polymarket.com/market/${m.slug}\" class=\"mover-link\" target=\"_blank\" rel=\"noopener\">${m.question}</a>`
+          ? `<a href=\"https://polymarket.com/market/${m.slug}\" class=\"mover-link\" target=\"_blank\" rel=\"noopener\">${m.question}${linkArrow}</a>`
           : m.question;
         moversList.innerHTML += `
           <div class=\"mover-item\">\n            <div class=\"mover-rank\">#${origIndex}</div>\n            <div class=\"mover-title\">${questionHtml}</div>\n            <div class=\"mover-change ${direction}\">\n              ${arrowSvg}<span>${m.priceChange.toFixed(2)}%</span>\n            </div>\n          </div>\n        `;
