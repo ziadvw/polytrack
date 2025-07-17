@@ -1,7 +1,7 @@
 """
 Hourly task:
 • read today's top-10 snapshot
-• recompute their average abs price change since 00:00 ET (fidelity 6 min)
+• recompute their average abs price change since 00:00 ET (fidelity 60 min)
 • write / overwrite today's value in data/daily_scores.json
 """
 
