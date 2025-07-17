@@ -121,6 +121,7 @@ body {
       display: flex;
       align-items: center;
       min-width: 0;
+      flex: 1 1 0%;
       overflow: hidden;
       /* Middle ellipsis for question text */
     }
@@ -128,6 +129,7 @@ body {
       display: flex;
       align-items: center;
       min-width: 0;
+      flex: 1 1 0%;
       overflow: hidden;
       /* Middle ellipsis for link text */
       font-weight: 600;
@@ -137,16 +139,16 @@ body {
     }
     .top-movers-list .mover-link-text {
       min-width: 0;
+      flex: 1 1 0%;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      display: inline-block;
+      display: block;
       vertical-align: middle;
       /* Middle ellipsis */
       text-align: left;
       direction: ltr;
       font-size: inherit;
-      flex-shrink: 1;
     }
     @supports (-webkit-mask-image: linear-gradient(black, black)) {
       .top-movers-list .mover-link-text {
