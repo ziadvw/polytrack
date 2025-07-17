@@ -113,15 +113,11 @@ async function loadTopMovers() {
           direction = 'neutral';
           arrowSvg = '';
         }
+        const questionHtml = m.slug
+          ? `<a href=\"https://polymarket.com/market/${m.slug}\" class=\"mover-link\" target=\"_blank\" rel=\"noopener\">${m.question}</a>`
+          : m.question;
         moversList.innerHTML += `
-          <div class="mover-item">
-            <div class="mover-rank">#${origIndex}</div>
-            <div class="mover-title">${m.question}</div>
-            <div class="mover-change ${direction}">
-              ${arrowSvg}<span>${m.priceChange.toFixed(2)}%</span>
-            </div>
-          </div>
-        `;
+          <div class=\"mover-item\">\n            <div class=\"mover-rank\">#${origIndex}</div>\n            <div class=\"mover-title\">${questionHtml}</div>\n            <div class=\"mover-change ${direction}\">\n              ${arrowSvg}<span>${m.priceChange.toFixed(2)}%</span>\n            </div>\n          </div>\n        `;
       });
     } else {
       console.warn('No top10 data found for today.');

@@ -101,8 +101,8 @@ body {
       max-width: 90vw !important;
     }
     .github-link svg {
-      height: 42px;
-      width: 42px;
+      height: 32px !important;
+      width: 32px !important;
     }
     .github-link {
       padding-left: 6px;
@@ -418,4 +418,15 @@ body {
       flex: none;
     }
   }
+  
+.mover-link {
+  color: #00E5FF;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+.mover-link:hover {
+  color: #00FFA3;
+  text-decoration: underline;
+}
   
