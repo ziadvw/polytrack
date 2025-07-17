@@ -478,10 +478,14 @@ body {
 }
   
 @media (max-width: 600px) {
+  .top-movers-list .mover-title {
+    font-size: 13px;
+  }
   .github-link {
-    font-size: 15px !important;
+    font-size: 18px !important;
     color: #888 !important;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     vertical-align: middle;
     margin-left: 0;
     padding-left: 0;
@@ -489,16 +493,10 @@ body {
     line-height: 1.2;
   }
   .github-link svg {
-    height: 15px !important;
-    width: 15px !important;
+    height: 22px !important;
+    width: 22px !important;
     vertical-align: middle;
     margin-right: 3px;
-  }
-  .feedback-btn {
-    font-size: 15px;
-    line-height: 1.2;
-    vertical-align: middle;
-    padding: 0;
   }
   .feedback-btn-row {
     align-items: center;
