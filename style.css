@@ -287,6 +287,12 @@ body {
     display: inline-block;
     margin-right: 2px;
   }
+  #event-popup .arrow svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    vertical-align: middle;
+  }
   
   #event-popup .percent.up {
     color: #00FFA3;
