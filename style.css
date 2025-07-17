@@ -75,11 +75,11 @@ body {
       padding: 0 2px;
     }
     .title {
-      font-size: 26px;
+      font-size: 30px;
       letter-spacing: -0.1px;
     }
     .top-movers-title {
-      font-size: 15.6px;
+      font-size: 15px;
     }
     .chart-container-wrapper {
       margin-bottom: 10px;
@@ -101,8 +101,8 @@ body {
       max-width: 90vw !important;
     }
     .github-link svg {
-      height: 28px;
-      width: 28px;
+      height: 36px;
+      width: 36px;
     }
     .github-link {
       padding-left: 6px;
