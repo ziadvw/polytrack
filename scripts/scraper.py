@@ -59,6 +59,10 @@ def scrape_markets(
             "question":    m.get("question"),
         }
 
+        # Add slug if present
+        if slug := m.get("slug"):
+            rec["slug"] = slug
+
         # timestamps
         for fld in ("createdAt", "closedTime"):
             if cleaned := clean_timestamp(m.get(fld)):
