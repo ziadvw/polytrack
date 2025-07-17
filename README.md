@@ -27,5 +27,7 @@ I think this makes more sense now, though I’m open to suggestions. There are p
 - All data syncing and updates are automated and run regularly via GitHub Actions.
 
 # Todo
+- Tweak formula
+  - Deduplicate markets that share same event by highest price change instead of highest OI
 - Overlay OI graph on the chart
-- Deduplicate markets that share same event by highest price change instead of highest OI
+
