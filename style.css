@@ -111,8 +111,8 @@ body {
       line-height: 1.2;
     }
     .github-link svg {
-      height: 13px !important;
-      width: 13px !important;
+      height: 15px !important;
+      width: 15px !important;
       vertical-align: middle;
       margin-right: 3px;
     }
@@ -122,20 +122,26 @@ body {
       align-items: center;
       min-width: 0;
       overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
+      /* Middle ellipsis for child link */
     }
     .top-movers-list .mover-link {
       display: flex;
       align-items: center;
       min-width: 0;
       overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
       flex-shrink: 1;
       color: #fff !important;
       text-decoration: none !important;
       font-weight: 600;
+      text-overflow: ellipsis;
+      /* Middle ellipsis */
+      direction: rtl;
+      text-align: left;
+    }
+    .top-movers-list .mover-link > * {
+      direction: ltr;
     }
     .top-movers-list .mover-link:hover {
       color: #00E5FF !important;
