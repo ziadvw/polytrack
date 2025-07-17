@@ -135,7 +135,7 @@ body {
       flex-shrink: 1;
       color: #fff !important;
       text-decoration: none !important;
-      font-weight: 600;
+      font-weight: 400;
     }
     .top-movers-list .mover-link:hover {
       color: #00E5FF !important;
@@ -255,7 +255,7 @@ body {
   .github-link {
     display: flex;
     align-items: center;
-    color: #fff;
+    color: #888;
     text-decoration: none;
     padding-left: 0;
     margin-left: 10px;
@@ -461,7 +461,7 @@ body {
 .mover-link {
   color: #fff;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 400;
   transition: color 0.2s, text-decoration 0.2s;
 }
 .mover-link:hover {
@@ -475,5 +475,33 @@ body {
   margin-left: 0.25em;
   width: 1em;
   height: 1em;
+}
+  
+@media (max-width: 600px) {
+  .github-link {
+    font-size: 15px !important;
+    color: #888 !important;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0;
+    padding-left: 0;
+    height: auto;
+    line-height: 1.2;
+  }
+  .github-link svg {
+    height: 13px !important;
+    width: 13px !important;
+    vertical-align: middle;
+    margin-right: 3px;
+  }
+  .feedback-btn {
+    font-size: 15px;
+    line-height: 1.2;
+    vertical-align: middle;
+    padding: 0;
+  }
+  .feedback-btn-row {
+    align-items: center;
+  }
 }
   
