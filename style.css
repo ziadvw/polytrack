@@ -49,7 +49,8 @@ body {
     left: 12px;
     top: 12px;
     z-index: 1;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 400;
     font-family: sans-serif;
     line-height: 20px;
     font-weight: 300;
@@ -73,8 +74,8 @@ body {
       padding: 0 2px;
     }
     .title {
-      font-size: 16px;
-      letter-spacing: -0.1px;
+      font-size: 24px;
+      letter-spacing: -0.2px;
     }
     .chart-container-wrapper {
       margin-bottom: 10px;
@@ -84,11 +85,11 @@ body {
     }
     .time-controls button {
       padding: 6px 10px;
-      font-size: 11px;
+      font-size: 10px;
     }
     .chart-legend {
-      font-size: 9px !important;
-      line-height: 12px !important;
+      font-size: 11px !important;
+      line-height: 14px !important;
       left: 4px !important;
       top: 4px !important;
       padding: 2px 5px !important;
@@ -112,7 +113,7 @@ body {
     background: transparent;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: #666666;
     transition: all 0.2s ease;
@@ -137,7 +138,7 @@ body {
   }
   
   .top-movers-title {
-    font-size: 18px;
+    font-size: 28px;
     font-weight: 700;
     margin-bottom: 12px;
     color: #ffffff;
@@ -151,33 +152,35 @@ body {
   
   .mover-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background: #181c22;
     padding: 8px 12px;
     border-radius: 10px;
+    gap: 8px;
   }
   
   .mover-rank {
     font-weight: 600;
     color: #00E5FF;
-    margin-right: 8px;
+    width: 28px;
+    min-width: 28px;
+    max-width: 28px;
+    text-align: left;
   }
   
   .mover-title {
     flex: 1;
-    font-size: 13px;
+    font-size: 15px;
     color: #ffffff;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-right: 8px;
   }
   
   .mover-change {
     display: flex;
     align-items: center;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 600;
   }
   
@@ -237,10 +240,10 @@ body {
     padding: 7px;
     border-radius: 7px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    max-width: 220px;
+    max-width: 400px;
     z-index: 10;
-    font-size: 11px;
-    line-height: 1.1;
+    font-size: 12px;
+    line-height: 1.2;
     pointer-events: none;
     border: 1px solid #1a1a1a;
   }
@@ -249,15 +252,15 @@ body {
     background: #181c22;
     border-radius: 6px;
     margin-bottom: 6px;
-    padding: 6px 7px 4px 7px;
+    padding: 7px 8px 5px 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.12);
   }
   
   #event-popup .event-title {
-    font-size: 8px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 700;
     color: #fff;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
   }
   
   #event-popup .event-value {
@@ -269,10 +272,13 @@ body {
   #event-popup .event-value .percent-container {
     display: flex;
     align-items: center;
-    min-width: 54px;
-    max-width: 54px;
+    width: 62px;
+    min-width: 62px;
+    max-width: 62px;
     justify-content: flex-start;
     padding-left: 2px;
+    gap: 0;
+    flex: none;
   }
   
   #event-popup .arrow {
@@ -295,14 +301,21 @@ body {
   }
   
   #event-popup .percent {
-    font-size: 9.5px;
+    font-size: 11px;
     font-weight: 700;
-    min-width: 24px;
+    width: auto;
+    min-width: 0;
+    max-width: none;
     text-align: right;
+    overflow: visible;
+    text-overflow: unset;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   
   #event-popup .percent-bar-bg {
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 24px;
     height: 4.5px;
     background: #222;
     border-radius: 2px;
@@ -341,5 +354,41 @@ body {
     padding-right: 8px;
     margin-top: 24px;
     margin-bottom: 4px;
+  }
+  
+  @media (max-width: 600px) {
+    #event-popup {
+      font-size: 13px;
+      padding: 9px;
+      max-width: 98vw;
+      border-radius: 9px;
+    }
+    #event-popup .event-card {
+      padding: 9px 9px 7px 9px;
+      border-radius: 9px;
+    }
+    #event-popup .event-title {
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+    #event-popup .percent {
+      font-size: 13px;
+      width: auto;
+      min-width: 0;
+      max-width: none;
+    }
+    #event-popup .percent-bar-bg {
+      min-width: 28px;
+    }
+    #event-popup {
+      max-width: 98vw;
+    }
+    #event-popup .event-value .percent-container {
+      width: 74px;
+      min-width: 74px;
+      max-width: 74px;
+      gap: 0;
+      flex: none;
+    }
   }
   

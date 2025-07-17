@@ -105,10 +105,10 @@ async function loadTopMovers() {
         let direction, arrowSvg = '';
         if (m.priceChange > 0) {
           direction = 'up';
-          arrowSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l6 8h-4v8h-4v-8h-4z"/></svg>';
+          arrowSvg = '';
         } else if (m.priceChange < 0) {
           direction = 'down';
-          arrowSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-6-8h4v-8h4v8h4z"/></svg>';
+          arrowSvg = '';
         } else {
           direction = 'neutral';
           arrowSvg = '';
