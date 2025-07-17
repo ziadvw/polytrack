@@ -122,20 +122,42 @@ body {
       align-items: center;
       min-width: 0;
       overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      /* Middle ellipsis for question text */
     }
     .top-movers-list .mover-link {
       display: flex;
       align-items: center;
       min-width: 0;
       overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      flex-shrink: 1;
+      /* Middle ellipsis for link text */
+      font-weight: 600;
       color: #fff !important;
       text-decoration: none !important;
-      font-weight: 600;
+      white-space: nowrap;
+    }
+    .top-movers-list .mover-link-text {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      vertical-align: middle;
+      /* Middle ellipsis */
+      text-align: left;
+      direction: ltr;
+    }
+    @supports (-webkit-mask-image: linear-gradient(black, black)) {
+      .top-movers-list .mover-link-text {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        display: inline-block;
+        max-width: 100%;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: horizontal;
+        -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+        mask-image: linear-gradient(to right, black 80%, transparent 100%);
+      }
     }
     .top-movers-list .mover-link:hover {
       color: #00E5FF !important;
