@@ -145,6 +145,8 @@ body {
       /* Middle ellipsis */
       text-align: left;
       direction: ltr;
+      font-size: inherit;
+      flex-shrink: 1;
     }
     @supports (-webkit-mask-image: linear-gradient(black, black)) {
       .top-movers-list .mover-link-text {
