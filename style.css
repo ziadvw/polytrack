@@ -78,7 +78,7 @@ body {
       letter-spacing: -0.2px;
     }
     .top-movers-title {
-      font-size: 20px;
+      font-size: 16px;
     }
     .chart-container-wrapper {
       margin-bottom: 10px;
@@ -240,12 +240,12 @@ body {
     position: absolute;
     background: #1a1a1a;
     color: #fff;
-    padding: 7px;
-    border-radius: 7px;
+    padding: 4px;
+    border-radius: 9px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    max-width: 400px;
+    max-width: 98vw;
     z-index: 10;
-    font-size: 12px;
+    font-size: 10px;
     line-height: 1.2;
     pointer-events: none;
     border: 1px solid #1a1a1a;
@@ -255,7 +255,7 @@ body {
     background: #181c22;
     border-radius: 6px;
     margin-bottom: 6px;
-    padding: 7px 8px 5px 8px;
+    padding: 6px 6px 4px 6px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.12);
   }
   
@@ -263,7 +263,7 @@ body {
     font-size: 10px;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
   
   #event-popup .event-value {
@@ -309,7 +309,7 @@ body {
   }
   
   #event-popup .percent {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     width: auto;
     min-width: 0;
@@ -358,12 +358,21 @@ body {
   
   .feedback-btn-row {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
     padding-right: 8px;
     margin-top: 24px;
     margin-bottom: 4px;
+    width: 100%;
+  }
+  
+  .feedback-btn-row .feedback-btn {
+    margin-right: auto;
+  }
+  
+  .feedback-btn-row .github-link {
+    margin-left: auto;
   }
   
   @media (max-width: 600px) {
