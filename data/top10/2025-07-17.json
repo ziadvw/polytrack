@@ -18,7 +18,7 @@
     "tokenId": "73793697275923646355831824753345919471011673129768736520616870696302293395247",
     "question": "No change in Fed interest rates after July 2025 meeting?",
     "openInterest": 2179361.355999,
-    "priceChange": -0.1
+    "priceChange": 0.05
   },
   {
     "conditionId": "0xebfd12ede5c2ef43189c4f37701ca7137e84a7b0cc25741d5ce223bbdc49f47f",
@@ -32,21 +32,21 @@
     "tokenId": "75505728818237076147318796536066812362152358606307154083407489467059230821371",
     "question": "Khamenei out as Supreme Leader of Iran in 2025?",
     "openInterest": 1710237.372132,
-    "priceChange": 0.0
+    "priceChange": 0.5
   },
   {
     "conditionId": "0x01d5f475cb30704216ae9906d369c0b2991cafec882ab4888a66ff11eb03e569",
     "tokenId": "44446628319261786751896876365833910598445252343588252409740203088317210950410",
     "question": "Jerome Powell out as Fed Chair in 2025?",
     "openInterest": 1679975.843751,
-    "priceChange": 0.0
+    "priceChange": -1.0
   },
   {
     "conditionId": "0xab6faa3e66abacc484bbb4bd31ae5e2a56d6f6252b5023631f1bd9e5299fa2f8",
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 1631898.555349,
-    "priceChange": 0.3
+    "priceChange": 0.25
   },
   {
     "conditionId": "0xcb1531b00e984865530f13e4ce35bcbc7d71615af98827b5e9aee2ca2984b626",
@@ -60,13 +60,13 @@
     "tokenId": "31268176944017248400034672618368276182667666720465434550595395503469605004388",
     "question": "Israel x Hamas ceasefire before August?",
     "openInterest": 1261812.812664,
-    "priceChange": -0.5
+    "priceChange": 0.0
   },
   {
     "conditionId": "0x62e939fbcb26aee4f172520444ef43a83adf3ea6155e2ae5d0871c13accdf21b",
     "tokenId": "13482242778366768315395030326922727504294085396864365135248842419774074207478",
     "question": "Will Ethereum reach $4000 in July?",
     "openInterest": 1180934.56822,
-    "priceChange": 7.8
+    "priceChange": 7.1
   }
 ]
