@@ -25,7 +25,7 @@
     "tokenId": "32472689363633232251888735842780829434506566435025707987014623316114512196519",
     "question": "Will Bitcoin reach $150K in July?",
     "openInterest": 1980391.755079,
-    "priceChange": 0.25
+    "priceChange": 0.2
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
@@ -60,7 +60,7 @@
     "tokenId": "31268176944017248400034672618368276182667666720465434550595395503469605004388",
     "question": "Israel x Hamas ceasefire before August?",
     "openInterest": 1306922.47761,
-    "priceChange": 3.0
+    "priceChange": 1.0
   },
   {
     "conditionId": "0x4e2887e913cd6e091c9b07b5e4013b24f372453efa6f11a0b0c5f65371729cf4",
