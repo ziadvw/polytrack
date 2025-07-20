@@ -11,7 +11,7 @@
     "tokenId": "73793697275923646355831824753345919471011673129768736520616870696302293395247",
     "question": "No change in Fed interest rates after July 2025 meeting?",
     "openInterest": 2641169.103435,
-    "priceChange": -0.3
+    "priceChange": -0.2
   },
   {
     "conditionId": "0x8ee2f1640386310eb5e7ffa596ba9335f2d324e303d21b0dfea6998874445791",
@@ -46,7 +46,7 @@
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 1684704.801438,
-    "priceChange": -0.15
+    "priceChange": -0.2
   },
   {
     "conditionId": "0xcb1531b00e984865530f13e4ce35bcbc7d71615af98827b5e9aee2ca2984b626",
@@ -60,7 +60,7 @@
     "tokenId": "31268176944017248400034672618368276182667666720465434550595395503469605004388",
     "question": "Israel x Hamas ceasefire before August?",
     "openInterest": 1414683.790584,
-    "priceChange": 4.0
+    "priceChange": 3.0
   },
   {
     "conditionId": "0xf2ce8d3897ac5009a131637d3575f1f91c579bd08eecce6ae2b2da0f32bbe6f1",
