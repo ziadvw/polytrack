@@ -32,7 +32,7 @@
     "tokenId": "44446628319261786751896876365833910598445252343588252409740203088317210950410",
     "question": "Jerome Powell out as Fed Chair in 2025?",
     "openInterest": 1836586.755404,
-    "priceChange": 2.0
+    "priceChange": 1.0
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
@@ -60,7 +60,7 @@
     "tokenId": "31268176944017248400034672618368276182667666720465434550595395503469605004388",
     "question": "Israel x Hamas ceasefire before August?",
     "openInterest": 1704724.048969,
-    "priceChange": 12.0
+    "priceChange": 8.0
   },
   {
     "conditionId": "0xab6faa3e66abacc484bbb4bd31ae5e2a56d6f6252b5023631f1bd9e5299fa2f8",
