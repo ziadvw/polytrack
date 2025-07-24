@@ -4,14 +4,14 @@
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "openInterest": 4607208.320535,
-    "priceChange": 0.1
+    "priceChange": 0.0
   },
   {
     "conditionId": "0x4a68d828f7263f34391484404380c34efa9566f12a08a88553ddbe8e285c3ae9",
     "tokenId": "73793697275923646355831824753345919471011673129768736520616870696302293395247",
     "question": "No change in Fed interest rates after July 2025 meeting?",
     "openInterest": 3163240.174846,
-    "priceChange": 0.25
+    "priceChange": 0.4
   },
   {
     "conditionId": "0x18b1c135d0a40c5894da9412e77311827d9caf16cf4cd6591b247a34730af919",
@@ -39,7 +39,7 @@
     "tokenId": "31268176944017248400034672618368276182667666720465434550595395503469605004388",
     "question": "Israel x Hamas ceasefire before August?",
     "openInterest": 2197206.127009,
-    "priceChange": -10.0
+    "priceChange": -12.0
   },
   {
     "conditionId": "0x7ad403c3508f8e3912940fd1a913f227591145ca0614074208e0b962d5fcc422",
@@ -53,7 +53,7 @@
     "tokenId": "32472689363633232251888735842780829434506566435025707987014623316114512196519",
     "question": "Will Bitcoin reach $150K in July?",
     "openInterest": 1965636.996345,
-    "priceChange": -0.05
+    "priceChange": 0.05
   },
   {
     "conditionId": "0x01d5f475cb30704216ae9906d369c0b2991cafec882ab4888a66ff11eb03e569",
