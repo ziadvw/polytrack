@@ -11,7 +11,7 @@
     "tokenId": "73793697275923646355831824753345919471011673129768736520616870696302293395247",
     "question": "No change in Fed interest rates after July 2025 meeting?",
     "openInterest": 3163240.174846,
-    "priceChange": 0.2
+    "priceChange": 0.25
   },
   {
     "conditionId": "0x18b1c135d0a40c5894da9412e77311827d9caf16cf4cd6591b247a34730af919",
@@ -39,7 +39,7 @@
     "tokenId": "31268176944017248400034672618368276182667666720465434550595395503469605004388",
     "question": "Israel x Hamas ceasefire before August?",
     "openInterest": 2197206.127009,
-    "priceChange": -7.0
+    "priceChange": -10.0
   },
   {
     "conditionId": "0x7ad403c3508f8e3912940fd1a913f227591145ca0614074208e0b962d5fcc422",
@@ -60,7 +60,7 @@
     "tokenId": "44446628319261786751896876365833910598445252343588252409740203088317210950410",
     "question": "Jerome Powell out as Fed Chair in 2025?",
     "openInterest": 1863275.295909,
-    "priceChange": 0.0
+    "priceChange": 1.0
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
