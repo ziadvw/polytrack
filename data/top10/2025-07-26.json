@@ -4,14 +4,14 @@
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "openInterest": 4618188.049589,
-    "priceChange": 0.05
+    "priceChange": 0.0
   },
   {
     "conditionId": "0x4a68d828f7263f34391484404380c34efa9566f12a08a88553ddbe8e285c3ae9",
     "tokenId": "73793697275923646355831824753345919471011673129768736520616870696302293395247",
     "question": "No change in Fed interest rates after July 2025 meeting?",
     "openInterest": 4094793.559456,
-    "priceChange": -0.5
+    "priceChange": -0.65
   },
   {
     "conditionId": "0x18b1c135d0a40c5894da9412e77311827d9caf16cf4cd6591b247a34730af919",
@@ -25,7 +25,7 @@
     "tokenId": "114304586861386186441621124384163963092522056897081085884483958561365015034812",
     "question": "Xi Jinping out in 2025?",
     "openInterest": 3392745.194012,
-    "priceChange": 0.0
+    "priceChange": 1.0
   },
   {
     "conditionId": "0x7ad403c3508f8e3912940fd1a913f227591145ca0614074208e0b962d5fcc422",
@@ -53,7 +53,7 @@
     "tokenId": "31268176944017248400034672618368276182667666720465434550595395503469605004388",
     "question": "Israel x Hamas ceasefire before August?",
     "openInterest": 1806947.700145,
-    "priceChange": 0.8
+    "priceChange": 0.75
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
@@ -67,6 +67,6 @@
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 1699643.179819,
-    "priceChange": -0.4
+    "priceChange": -0.7
   }
 ]
