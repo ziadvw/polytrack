@@ -4,21 +4,21 @@
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "openInterest": 4618354.773136,
-    "priceChange": 0.3
+    "priceChange": 0.05
   },
   {
     "conditionId": "0x4a68d828f7263f34391484404380c34efa9566f12a08a88553ddbe8e285c3ae9",
     "tokenId": "73793697275923646355831824753345919471011673129768736520616870696302293395247",
     "question": "No change in Fed interest rates after July 2025 meeting?",
     "openInterest": 4453068.565952,
-    "priceChange": -0.85
+    "priceChange": -0.2
   },
   {
     "conditionId": "0xf2ce8d3897ac5009a131637d3575f1f91c579bd08eecce6ae2b2da0f32bbe6f1",
     "tokenId": "114304586861386186441621124384163963092522056897081085884483958561365015034812",
     "question": "Xi Jinping out in 2025?",
     "openInterest": 3458742.178939,
-    "priceChange": 0.5
+    "priceChange": 0.0
   },
   {
     "conditionId": "0x18b1c135d0a40c5894da9412e77311827d9caf16cf4cd6591b247a34730af919",
@@ -46,27 +46,27 @@
     "tokenId": "32472689363633232251888735842780829434506566435025707987014623316114512196519",
     "question": "Will Bitcoin reach $150K in July?",
     "openInterest": 1921549.218404,
-    "priceChange": -0.2
+    "priceChange": -0.25
   },
   {
     "conditionId": "0x43a0e99dec7bb0c6ae5a9166cf6df932a36ca721eb62f673eda5ea87232bc8f2",
     "tokenId": "31268176944017248400034672618368276182667666720465434550595395503469605004388",
     "question": "Israel x Hamas ceasefire before August?",
     "openInterest": 1789230.371462,
-    "priceChange": -0.05
+    "priceChange": -0.1
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
     "tokenId": "75505728818237076147318796536066812362152358606307154083407489467059230821371",
     "question": "Khamenei out as Supreme Leader of Iran in 2025?",
     "openInterest": 1744202.763824,
-    "priceChange": 0.0
+    "priceChange": 0.5
   },
   {
     "conditionId": "0xab6faa3e66abacc484bbb4bd31ae5e2a56d6f6252b5023631f1bd9e5299fa2f8",
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 1697724.53955,
-    "priceChange": 0.5
+    "priceChange": 0.8
   }
 ]
