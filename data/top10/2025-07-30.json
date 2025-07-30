@@ -4,7 +4,7 @@
     "tokenId": "73793697275923646355831824753345919471011673129768736520616870696302293395247",
     "question": "No change in Fed interest rates after July 2025 meeting?",
     "openInterest": 9183574.349375,
-    "priceChange": -0.7
+    "priceChange": -0.8
   },
   {
     "conditionId": "0x35bc1bf05846a2d4a72ff03f1c93b8f41ec6a45241a2292ddbb2c919dd7a68f3",
@@ -18,7 +18,7 @@
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "openInterest": 4704249.850379,
-    "priceChange": -0.2
+    "priceChange": -0.05
   },
   {
     "conditionId": "0xf2ce8d3897ac5009a131637d3575f1f91c579bd08eecce6ae2b2da0f32bbe6f1",
@@ -32,7 +32,7 @@
     "tokenId": "15974786252393396629980467963784550802583781222733347534844974829144359265969",
     "question": "Russia x Ukraine ceasefire in 2025?",
     "openInterest": 2448738.332201,
-    "priceChange": -0.5
+    "priceChange": -1.0
   },
   {
     "conditionId": "0x18b1c135d0a40c5894da9412e77311827d9caf16cf4cd6591b247a34730af919",
@@ -53,7 +53,7 @@
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 1790731.84473,
-    "priceChange": 0.05
+    "priceChange": -0.15
   },
   {
     "conditionId": "0x7ad403c3508f8e3912940fd1a913f227591145ca0614074208e0b962d5fcc422",
