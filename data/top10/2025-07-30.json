@@ -11,14 +11,14 @@
     "tokenId": "47628942075360533490050615039336250156087545147291100999521864034949358169145",
     "question": "Thailand strikes Cambodia by Friday?",
     "openInterest": 6986211.427584,
-    "priceChange": 0.05
+    "priceChange": 0.15
   },
   {
     "conditionId": "0xebddfcf7b4401dade8b4031770a1ab942b01854f3bed453d5df9425cd9f211a9",
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "openInterest": 4704249.850379,
-    "priceChange": 1.05
+    "priceChange": 1.4
   },
   {
     "conditionId": "0xf2ce8d3897ac5009a131637d3575f1f91c579bd08eecce6ae2b2da0f32bbe6f1",
@@ -46,14 +46,14 @@
     "tokenId": "32472689363633232251888735842780829434506566435025707987014623316114512196519",
     "question": "Will Bitcoin reach $150K in July?",
     "openInterest": 1946840.440025,
-    "priceChange": -0.1
+    "priceChange": -0.15
   },
   {
     "conditionId": "0xab6faa3e66abacc484bbb4bd31ae5e2a56d6f6252b5023631f1bd9e5299fa2f8",
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 1790731.84473,
-    "priceChange": 0.05
+    "priceChange": -0.05
   },
   {
     "conditionId": "0x7ad403c3508f8e3912940fd1a913f227591145ca0614074208e0b962d5fcc422",
