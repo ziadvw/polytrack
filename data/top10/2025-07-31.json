@@ -39,7 +39,7 @@
     "tokenId": "32472689363633232251888735842780829434506566435025707987014623316114512196519",
     "question": "Will Bitcoin reach $150K in July?",
     "openInterest": 1952147.670025,
-    "priceChange": -0.05
+    "priceChange": -0.1
   },
   {
     "conditionId": "0x01d5f475cb30704216ae9906d369c0b2991cafec882ab4888a66ff11eb03e569",
@@ -53,7 +53,7 @@
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 1757940.292797,
-    "priceChange": 0.05
+    "priceChange": 0.0
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
