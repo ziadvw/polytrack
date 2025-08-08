@@ -39,14 +39,14 @@
     "tokenId": "44446628319261786751896876365833910598445252343588252409740203088317210950410",
     "question": "Jerome Powell out as Fed Chair in 2025?",
     "openInterest": 1944277.248111,
-    "priceChange": 0.0
+    "priceChange": -1.0
   },
   {
     "conditionId": "0xab6faa3e66abacc484bbb4bd31ae5e2a56d6f6252b5023631f1bd9e5299fa2f8",
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 1907616.278923,
-    "priceChange": 0.0
+    "priceChange": -0.05
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
