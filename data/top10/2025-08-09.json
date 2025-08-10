@@ -4,14 +4,14 @@
     "tokenId": "114304586861386186441621124384163963092522056897081085884483958561365015034812",
     "question": "Xi Jinping out in 2025?",
     "openInterest": 5163017.749011,
-    "priceChange": 0.5
+    "priceChange": 0.0
   },
   {
     "conditionId": "0xebddfcf7b4401dade8b4031770a1ab942b01854f3bed453d5df9425cd9f211a9",
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "openInterest": 4877763.374737,
-    "priceChange": 0.0
+    "priceChange": -0.05
   },
   {
     "conditionId": "0x18b1c135d0a40c5894da9412e77311827d9caf16cf4cd6591b247a34730af919",
@@ -32,14 +32,14 @@
     "tokenId": "15974786252393396629980467963784550802583781222733347534844974829144359265969",
     "question": "Russia x Ukraine ceasefire in 2025?",
     "openInterest": 2720683.293157,
-    "priceChange": -4.0
+    "priceChange": -3.5
   },
   {
     "conditionId": "0xab6faa3e66abacc484bbb4bd31ae5e2a56d6f6252b5023631f1bd9e5299fa2f8",
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 2152153.552863,
-    "priceChange": -0.55
+    "priceChange": 0.0
   },
   {
     "conditionId": "0x01d5f475cb30704216ae9906d369c0b2991cafec882ab4888a66ff11eb03e569",
