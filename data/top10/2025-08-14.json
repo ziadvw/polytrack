@@ -18,7 +18,7 @@
     "tokenId": "31465856707691063313218446271859090099024096042381836172739979558035875925704",
     "question": "Trump deploys National Guard in D.C. by Monday?",
     "openInterest": 4151371.50565,
-    "priceChange": 0.0
+    "priceChange": -0.1
   },
   {
     "conditionId": "0x7ad403c3508f8e3912940fd1a913f227591145ca0614074208e0b962d5fcc422",
@@ -39,7 +39,7 @@
     "tokenId": "15974786252393396629980467963784550802583781222733347534844974829144359265969",
     "question": "Russia x Ukraine ceasefire in 2025?",
     "openInterest": 2958842.882275,
-    "priceChange": -6.5
+    "priceChange": -5.0
   },
   {
     "conditionId": "0x18b1c135d0a40c5894da9412e77311827d9caf16cf4cd6591b247a34730af919",
