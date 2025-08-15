@@ -11,14 +11,14 @@
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "openInterest": 4932722.479647,
-    "priceChange": 0.05
+    "priceChange": 0.15
   },
   {
     "conditionId": "0xec05c24e569aca2bdd5d6e948f7810e1b4449cb98433c0e34bc8c4baa1df3ef8",
     "tokenId": "31465856707691063313218446271859090099024096042381836172739979558035875925704",
     "question": "Trump deploys National Guard in D.C. by Monday?",
     "openInterest": 4151371.50565,
-    "priceChange": -0.05
+    "priceChange": 0.1
   },
   {
     "conditionId": "0x7ad403c3508f8e3912940fd1a913f227591145ca0614074208e0b962d5fcc422",
@@ -32,7 +32,7 @@
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 2975995.156336,
-    "priceChange": 0.8
+    "priceChange": -0.05
   },
   {
     "conditionId": "0x8ee2f1640386310eb5e7ffa596ba9335f2d324e303d21b0dfea6998874445791",
@@ -67,6 +67,6 @@
     "tokenId": "31744904918540551255746477870591988696765533508454358136402838182759217759615",
     "question": "Will China invade Taiwan in 2025?",
     "openInterest": 1591129.625236,
-    "priceChange": 1.0
+    "priceChange": 0.5
   }
 ]
