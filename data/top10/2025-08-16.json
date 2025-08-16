@@ -18,7 +18,7 @@
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 3338157.199685,
-    "priceChange": 0.0
+    "priceChange": -0.2
   },
   {
     "conditionId": "0x7ad403c3508f8e3912940fd1a913f227591145ca0614074208e0b962d5fcc422",
@@ -32,7 +32,7 @@
     "tokenId": "15974786252393396629980467963784550802583781222733347534844974829144359265969",
     "question": "Russia x Ukraine ceasefire in 2025?",
     "openInterest": 3169164.341508,
-    "priceChange": 0.5
+    "priceChange": -0.5
   },
   {
     "conditionId": "0x18b1c135d0a40c5894da9412e77311827d9caf16cf4cd6591b247a34730af919",
@@ -60,7 +60,7 @@
     "tokenId": "31744904918540551255746477870591988696765533508454358136402838182759217759615",
     "question": "Will China invade Taiwan in 2025?",
     "openInterest": 1593910.570636,
-    "priceChange": 0.0
+    "priceChange": -0.5
   },
   {
     "conditionId": "0xac2be3a5471b343d43b9f0d3f141611b91feb8c66aed8e286cd3d2540714aaba",
