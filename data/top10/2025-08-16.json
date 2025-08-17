@@ -11,14 +11,14 @@
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "openInterest": 4924992.357521,
-    "priceChange": -0.1
+    "priceChange": -0.2
   },
   {
     "conditionId": "0xab6faa3e66abacc484bbb4bd31ae5e2a56d6f6252b5023631f1bd9e5299fa2f8",
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 3338157.199685,
-    "priceChange": 0.85
+    "priceChange": 1.15
   },
   {
     "conditionId": "0x7ad403c3508f8e3912940fd1a913f227591145ca0614074208e0b962d5fcc422",
@@ -39,14 +39,14 @@
     "tokenId": "40081275558852222228080198821361202017557872256707631666334039001378518619916",
     "question": "Will J.D. Vance win the 2028 Republican presidential nomination?",
     "openInterest": 2325119.451407,
-    "priceChange": 0.0
+    "priceChange": -1.0
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
     "tokenId": "75505728818237076147318796536066812362152358606307154083407489467059230821371",
     "question": "Khamenei out as Supreme Leader of Iran in 2025?",
     "openInterest": 1812906.507735,
-    "priceChange": 0.5
+    "priceChange": 0.0
   },
   {
     "conditionId": "0x01d5f475cb30704216ae9906d369c0b2991cafec882ab4888a66ff11eb03e569",
