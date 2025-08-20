@@ -25,7 +25,7 @@
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 3712594.223348,
-    "priceChange": 0.35
+    "priceChange": 0.5
   },
   {
     "conditionId": "0x8ee2f1640386310eb5e7ffa596ba9335f2d324e303d21b0dfea6998874445791",
@@ -67,6 +67,6 @@
     "tokenId": "20687552179259492015264396642668768958132112743605647653821858729131283300433",
     "question": "No change in Fed interest rates after September 2025 meeting?",
     "openInterest": 1708761.410382,
-    "priceChange": 0.5
+    "priceChange": 2.0
   }
 ]
