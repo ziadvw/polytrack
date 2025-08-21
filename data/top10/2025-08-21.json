@@ -18,7 +18,7 @@
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 3742072.264969,
-    "priceChange": -0.2
+    "priceChange": -0.25
   },
   {
     "conditionId": "0x7ad403c3508f8e3912940fd1a913f227591145ca0614074208e0b962d5fcc422",
@@ -32,7 +32,7 @@
     "tokenId": "15974786252393396629980467963784550802583781222733347534844974829144359265969",
     "question": "Russia x Ukraine ceasefire in 2025?",
     "openInterest": 3604470.425559,
-    "priceChange": -3.0
+    "priceChange": -4.0
   },
   {
     "conditionId": "0x18b1c135d0a40c5894da9412e77311827d9caf16cf4cd6591b247a34730af919",
@@ -46,7 +46,7 @@
     "tokenId": "20687552179259492015264396642668768958132112743605647653821858729131283300433",
     "question": "No change in Fed interest rates after September 2025 meeting?",
     "openInterest": 1850185.271115,
-    "priceChange": 1.0
+    "priceChange": 4.0
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
@@ -60,13 +60,13 @@
     "tokenId": "75808883562514695201169204487787555859570951708948163798444132865757266366758",
     "question": "Russia x Ukraine ceasefire before October?",
     "openInterest": 1831652.518211,
-    "priceChange": -2.0
+    "priceChange": -3.0
   },
   {
     "conditionId": "0xac2be3a5471b343d43b9f0d3f141611b91feb8c66aed8e286cd3d2540714aaba",
     "tokenId": "15600657178409553723631854347165934450743544837722869853285023214749561849304",
     "question": "Will Bitcoin reach $250,000 by December 31, 2025?",
     "openInterest": 1699398.72514,
-    "priceChange": -0.15
+    "priceChange": -0.05
   }
 ]
