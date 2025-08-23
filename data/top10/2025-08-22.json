@@ -11,7 +11,7 @@
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "openInterest": 4978294.704922,
-    "priceChange": 0.15
+    "priceChange": 0.05
   },
   {
     "conditionId": "0xab6faa3e66abacc484bbb4bd31ae5e2a56d6f6252b5023631f1bd9e5299fa2f8",
@@ -53,7 +53,7 @@
     "tokenId": "75505728818237076147318796536066812362152358606307154083407489467059230821371",
     "question": "Khamenei out as Supreme Leader of Iran in 2025?",
     "openInterest": 1863484.322584,
-    "priceChange": 1.5
+    "priceChange": 1.0
   },
   {
     "conditionId": "0x41eda073eeca4071d3a643a527bf8549851ff16c7e4b924a007671cb11920f98",
@@ -67,6 +67,6 @@
     "tokenId": "15600657178409553723631854347165934450743544837722869853285023214749561849304",
     "question": "Will Bitcoin reach $250,000 by December 31, 2025?",
     "openInterest": 1699708.254075,
-    "priceChange": -0.05
+    "priceChange": 0.0
   }
 ]
