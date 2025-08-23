@@ -11,7 +11,7 @@
     "tokenId": "33945469250963963541781051637999677727672635213493648594066577298999471399137",
     "question": "Will Zohran Mamdani win the 2025 NYC mayoral election?",
     "openInterest": 4976147.463939,
-    "priceChange": 0.3
+    "priceChange": 0.25
   },
   {
     "conditionId": "0xab6faa3e66abacc484bbb4bd31ae5e2a56d6f6252b5023631f1bd9e5299fa2f8",
@@ -46,7 +46,7 @@
     "tokenId": "20687552179259492015264396642668768958132112743605647653821858729131283300433",
     "question": "No change in Fed interest rates after September 2025 meeting?",
     "openInterest": 1878976.257498,
-    "priceChange": -0.5
+    "priceChange": 0.5
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
