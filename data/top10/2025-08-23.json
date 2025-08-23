@@ -46,14 +46,14 @@
     "tokenId": "20687552179259492015264396642668768958132112743605647653821858729131283300433",
     "question": "No change in Fed interest rates after September 2025 meeting?",
     "openInterest": 1878976.257498,
-    "priceChange": 0.5
+    "priceChange": 0.0
   },
   {
     "conditionId": "0x1b6f76e5b8587ee896c35847e12d11e75290a8c3934c5952e8a9d6e4c6f03cfa",
     "tokenId": "75505728818237076147318796536066812362152358606307154083407489467059230821371",
     "question": "Khamenei out as Supreme Leader of Iran in 2025?",
     "openInterest": 1869052.801958,
-    "priceChange": 0.0
+    "priceChange": -0.5
   },
   {
     "conditionId": "0x41eda073eeca4071d3a643a527bf8549851ff16c7e4b924a007671cb11920f98",
@@ -67,6 +67,6 @@
     "tokenId": "15600657178409553723631854347165934450743544837722869853285023214749561849304",
     "question": "Will Bitcoin reach $250,000 by December 31, 2025?",
     "openInterest": 1699700.329305,
-    "priceChange": -0.15
+    "priceChange": -0.1
   }
 ]
