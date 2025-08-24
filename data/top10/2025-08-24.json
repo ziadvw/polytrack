@@ -4,7 +4,7 @@
     "tokenId": "114304586861386186441621124384163963092522056897081085884483958561365015034812",
     "question": "Xi Jinping out in 2025?",
     "openInterest": 6434361.97283,
-    "priceChange": 0.0
+    "priceChange": -0.5
   },
   {
     "conditionId": "0xebddfcf7b4401dade8b4031770a1ab942b01854f3bed453d5df9425cd9f211a9",
@@ -53,7 +53,7 @@
     "tokenId": "75808883562514695201169204487787555859570951708948163798444132865757266366758",
     "question": "Russia x Ukraine ceasefire before October?",
     "openInterest": 1792551.668054,
-    "priceChange": -0.5
+    "priceChange": 0.0
   },
   {
     "conditionId": "0xac2be3a5471b343d43b9f0d3f141611b91feb8c66aed8e286cd3d2540714aaba",
