@@ -4,7 +4,7 @@
     "tokenId": "114304586861386186441621124384163963092522056897081085884483958561365015034812",
     "question": "Xi Jinping out in 2025?",
     "openInterest": 6434361.97283,
-    "priceChange": -0.5
+    "priceChange": -1.0
   },
   {
     "conditionId": "0xebddfcf7b4401dade8b4031770a1ab942b01854f3bed453d5df9425cd9f211a9",
@@ -18,7 +18,7 @@
     "tokenId": "110231926589098351804293174455681788984678095258631881563984268486591441074567",
     "question": "Will Donald Trump win Nobel Peace Prize in 2025?",
     "openInterest": 3827126.339138,
-    "priceChange": -0.25
+    "priceChange": -0.4
   },
   {
     "conditionId": "0x8ee2f1640386310eb5e7ffa596ba9335f2d324e303d21b0dfea6998874445791",
@@ -53,14 +53,14 @@
     "tokenId": "75808883562514695201169204487787555859570951708948163798444132865757266366758",
     "question": "Russia x Ukraine ceasefire before October?",
     "openInterest": 1792551.668054,
-    "priceChange": 0.0
+    "priceChange": -0.5
   },
   {
     "conditionId": "0xac2be3a5471b343d43b9f0d3f141611b91feb8c66aed8e286cd3d2540714aaba",
     "tokenId": "15600657178409553723631854347165934450743544837722869853285023214749561849304",
     "question": "Will Bitcoin reach $250,000 by December 31, 2025?",
     "openInterest": 1699537.597503,
-    "priceChange": 0.05
+    "priceChange": -0.15
   },
   {
     "conditionId": "0x01d5f475cb30704216ae9906d369c0b2991cafec882ab4888a66ff11eb03e569",
